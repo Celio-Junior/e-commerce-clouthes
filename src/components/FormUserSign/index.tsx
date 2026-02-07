@@ -6,6 +6,7 @@ import Input from '../Input';
 import { useActionState, useEffect } from 'react';
 import { UserPublicDto } from '@/dto/User.dto';
 import { toast } from 'react-toastify';
+import clsx from 'clsx';
 
 type FormUserSingProps = {
   typeMethod: 'create' | 'login';
@@ -34,7 +35,12 @@ export default function FormUserSing({ typeMethod }: FormUserSingProps) {
           Name
         </Input>
       )}
-      <Input defaultValue={state.formState.email} name="email" placeholder="fulano123@gmail.com" type="email">
+      <Input
+        defaultValue={state.formState.email}
+        name="email"
+        placeholder="example123@gmail.com"
+        type="email"
+      >
         email
       </Input>
       {isSignup && (
@@ -43,17 +49,24 @@ export default function FormUserSing({ typeMethod }: FormUserSingProps) {
         </Input>
       )}
 
-      <Input defaultValue={''} name="password" placeholder="Sua senha secreta" type="password">
-        Password
-      </Input>
-      {isSignup && (
-        <Input defaultValue={''} name="repPassword" placeholder="Sua senha secreta novamente" type="password">
-          Retry password
+      <div className={clsx('grid gap-2', isSignup && 'grid-cols-2')}>
+        <Input defaultValue={''} name="password" placeholder="ex: store23" type="password">
+          Password
         </Input>
-      )}
+        {isSignup && (
+          <Input
+            defaultValue={''}
+            name="repPassword"
+            placeholder="Sua senha secreta novamente"
+            type="password"
+          >
+            Retry password
+          </Input>
+        )}
+      </div>
 
       <Button disabled={isPending} type="submit" className="mt-6 " variant="confirm">
-        {!isSignup ? 'Entrar' : 'Criar'}
+        {!isSignup ? 'Login' : 'Create account'}
       </Button>
     </form>
   );

@@ -14,7 +14,7 @@ export default function Input({ type = 'text', className, children, name, ...res
   const handleClick = () => setIsViewPassword((prev) => !prev);
   return (
     <div className={inputDivClass}>
-      <label className="capitalize text-lg text-blue-600 font-semibold" htmlFor={name}>
+      <label className="capitalize text-lg text-gray-800 font-semibold" htmlFor={name}>
         {children}
       </label>
       <div className="relative flex items-center">
@@ -22,7 +22,7 @@ export default function Input({ type = 'text', className, children, name, ...res
           type={isViewPassword ? 'text' : type}
           name={name}
           className={clsx(
-            'border-2 rounded-lg py-1 px-2 w-full',
+            'border-2 rounded-lg py-1 px-2 w-full bg-gray-300/40',
             'placeholder:text-gray-400 placeholder:font-light text-gray-800 font-semibold',
             className,
           )}
