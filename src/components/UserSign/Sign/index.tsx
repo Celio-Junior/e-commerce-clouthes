@@ -25,7 +25,8 @@ export default function Sign({ actionUser, handleActionUser }: SignProps) {
             ? 'Fill in your information to log in.'
             : 'Create your account with us now to stay more fashionable.'}
         </p>
-        <FormUserSing typeMethod={actionUser} />
+        {/* passar de handleAction user */}
+        <FormUserSing handleActionSign={handleActionUser} typeMethod={actionUser} />
       </div>
 
       <p className="text-sm text-gray-500 text-center">or enter</p>

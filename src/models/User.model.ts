@@ -1,3 +1,4 @@
+// import { SequelizeInit } from '@/database';
 import { SequelizeInit } from '@/database';
 import { UserCreateAttributes, UserModel } from '@/interfaces/UserModel.interface';
 

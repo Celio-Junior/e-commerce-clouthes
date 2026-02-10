@@ -3,7 +3,7 @@ import { UserRepositoryInterface } from '@/interfaces/UserRepository.interface';
 import User from '@/models/User.model';
 //talvez criar serviços(regra de negócios) e hash pra senha
 class UserRepository implements UserRepositoryInterface {
-  async findOne(user: UserCreateAttributes): Promise<UserModel> {
+  async findOne(user: Partial<UserCreateAttributes>): Promise<UserModel> {
     const isUser = await User.findOne({ where: user });
 
     if (!isUser) throw new Error('User não existe');

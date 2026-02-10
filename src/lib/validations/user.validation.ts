@@ -17,6 +17,12 @@ export const CreateUserSchema = CreateUserBase.superRefine((value, ctx) => {
   }
 }).transform(({ name, phone, email, password }) => ({ name, phone, email, password }));
 
+export const LoginUserSchema = CreateUserBase.omit({
+  name: true,
+  repPassword: true,
+  phone: true,
+});
+
 export const UpdateUserSchema = CreateUserBase.omit({
   repPassword: true,
   password: true,

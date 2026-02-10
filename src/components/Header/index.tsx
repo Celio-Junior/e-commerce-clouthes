@@ -5,7 +5,7 @@ import { useState } from 'react';
 import UserSign from '../UserSign';
 
 export default function HeaderShop() {
-  const [signUser, setSignUser] = useState(true);
+  const [signUser, setSignUser] = useState(false);
 
   const handleCloseSign = () => setSignUser(() => false);
 
@@ -22,6 +22,15 @@ export default function HeaderShop() {
       </div>
 
       <div className="flex gap-3 items-center">
+        <button
+          onClick={() => setSignUser(() => true)}
+          type="button"
+          title="create/login User"
+          className="cursor-pointer transition-all hover:scale-105"
+        >
+          <CircleUserRoundIcon size={30} />
+        </button>
+
         <div className="flex gap-2 items-center bg-gray-950 px-3 py-2 rounded-2xl cursor-pointer">
           <button
             type="button"
@@ -32,15 +41,6 @@ export default function HeaderShop() {
           </button>
           <span className="text-gray-50  font-semibold">0</span>
         </div>
-
-        <button
-          onClick={() => setSignUser(() => true)}
-          type="button"
-          title="create/login User"
-          className="cursor-pointer transition-all hover:scale-105"
-        >
-          <CircleUserRoundIcon size={30} />
-        </button>
       </div>
 
       {!!signUser && <UserSign closeSign={handleCloseSign} />}
