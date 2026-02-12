@@ -8,17 +8,15 @@ import { UserPublicDto } from '@/dto/User.dto';
 import { toast } from 'react-toastify';
 import clsx from 'clsx';
 import LoginAction from '@/actions/user/login.action';
+import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
 
 type FormUserSingProps = {
   typeMethod: 'create' | 'login';
-  handleActionSign: () => void;
 };
 
-// criar um contexto (um state global)
-
-export default function FormUserSing({ typeMethod, handleActionSign }: FormUserSingProps) {
+export default function FormUserSing({ typeMethod }: FormUserSingProps) {
   const isSignup = typeMethod === 'create' ? true : false;
-
+  const [{ setSignUser }, { setIsViewFormLogin }] = useContextViewFormUser();
   const methodActionsUser = {
     create: registerAction,
     login: LoginAction,
@@ -36,15 +34,16 @@ export default function FormUserSing({ typeMethod, handleActionSign }: FormUserS
       toast.success('User create with success', {
         toastId: 'success user created',
       });
-      handleActionSign();
-    }
 
-    if (state.success && typeMethod === 'login') {
+      setIsViewFormLogin((prev) => !prev);
+    } else if (state.success) {
       toast.success('Login success', {
         toastId: 'login success',
       });
+
+      setSignUser((prev) => !prev);
     }
-  }, [handleActionSign, state, typeMethod]);
+  }, [setSignUser, state, typeMethod, setIsViewFormLogin]);
 
   return (
     <form className="flex flex-col" action={action}>

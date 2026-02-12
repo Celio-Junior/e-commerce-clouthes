@@ -1,13 +1,16 @@
 'use client';
 import { CircleUserRoundIcon, ShoppingBagIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
+
 import UserSign from '../UserSign';
 
-export default function HeaderShop() {
-  const [signUser, setSignUser] = useState(false);
+import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
 
-  const handleCloseSign = () => setSignUser(() => false);
+export default function HeaderShop() {
+  // const [signUser, setSignUser] = useState(false);
+  const [{ viewForm, setSignUser }] = useContextViewFormUser();
+
+  // const handleCloseSign = () => setSignUser(() => false);
 
   return (
     <header className="flex justify-between max-w-[90%] mx-auto p-6 relative">
@@ -26,9 +29,12 @@ export default function HeaderShop() {
           onClick={() => setSignUser(() => true)}
           type="button"
           title="create/login User"
-          className="cursor-pointer transition-all hover:scale-105"
+          className="cursor-pointer transition-all hover:scale-105 relative"
         >
           <CircleUserRoundIcon size={30} />
+          <span className="absolute -top-1 text-sm rounded-4xl bg-gray-900 text-gray-100 opacity-90 px-2">
+            ?
+          </span>
         </button>
 
         <div className="flex gap-2 items-center bg-gray-950 px-3 py-2 rounded-2xl cursor-pointer">
@@ -43,7 +49,7 @@ export default function HeaderShop() {
         </div>
       </div>
 
-      {!!signUser && <UserSign closeSign={handleCloseSign} />}
+      {!!viewForm && <UserSign />}
     </header>
   );
 }

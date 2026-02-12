@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import HeaderShop from '@/components/Header';
 import { Bounce, ToastContainer } from 'react-toastify';
+import ViewFormUser from '@/context/ViewFormUser';
 
 export const metadata: Metadata = {
   title: 'Store',
@@ -30,8 +31,10 @@ export default function RootLayout({
           theme="light"
           transition={Bounce}
         />
-        <HeaderShop />
-        {children}
+        <ViewFormUser>
+          <HeaderShop />
+          {children}
+        </ViewFormUser>
       </body>
     </html>
   );

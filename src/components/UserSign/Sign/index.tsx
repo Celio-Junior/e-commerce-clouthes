@@ -1,18 +1,19 @@
 import ButtonSocial from '@/components/ButtonSocial';
 import FormUserSing from '@/components/FormUserSign';
+import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
 import Link from 'next/link';
 import { MouseEvent } from 'react';
 
 type SignProps = {
   actionUser: 'login' | 'create';
-  handleActionUser: () => void;
 };
 
 //TODO terminar estilização do form
-export default function Sign({ actionUser, handleActionUser }: SignProps) {
+export default function Sign({ actionUser }: SignProps) {
+  const [, { setIsViewFormLogin }] = useContextViewFormUser();
   const handleClickDirection = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    handleActionUser();
+    setIsViewFormLogin((prev) => !prev);
   };
   return (
     <div className="w-[60%] h-full max-w-xl p-4 flex flex-col items-center justify-evenly ">
@@ -26,7 +27,7 @@ export default function Sign({ actionUser, handleActionUser }: SignProps) {
             : 'Create your account with us now to stay more fashionable.'}
         </p>
         {/* passar de handleAction user */}
-        <FormUserSing handleActionSign={handleActionUser} typeMethod={actionUser} />
+        <FormUserSing typeMethod={actionUser} />
       </div>
 
       <p className="text-sm text-gray-500 text-center">or enter</p>

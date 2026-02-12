@@ -3,14 +3,12 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import Sign from './Sign';
 import { CircleXIcon } from 'lucide-react';
-import { useState } from 'react';
 
-type UserSignProps = {
-  closeSign: () => void;
-};
+import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
 
-export default function UserSign({ closeSign }: UserSignProps) {
-  const [isViewLogin, setIsViewLogin] = useState(true);
+export default function UserSign() {
+  const [{ setSignUser }, { isViewFormLogin }] = useContextViewFormUser();
+
   return (
     <div
       className={clsx(
@@ -25,7 +23,7 @@ export default function UserSign({ closeSign }: UserSignProps) {
           'w-4xl',
           'transition',
           'h-[60%]',
-          !isViewLogin && 'h-[80%]',
+          !isViewFormLogin && 'h-[80%]',
           'rounded-2xl',
           'shadow-sm shadow-gray-200',
           'flex relative',
@@ -33,7 +31,7 @@ export default function UserSign({ closeSign }: UserSignProps) {
       >
         <span
           className="absolute right-3 top-2 cursor-pointer transition hover:scale-105"
-          onClick={closeSign}
+          onClick={() => setSignUser(() => false)}
         >
           <CircleXIcon size={30} />
         </span>
@@ -52,10 +50,7 @@ export default function UserSign({ closeSign }: UserSignProps) {
           />
         </div>
 
-        <Sign
-          actionUser={isViewLogin ? 'login' : 'create'}
-          handleActionUser={() => setIsViewLogin((prev) => !prev)}
-        />
+        <Sign actionUser={isViewFormLogin ? 'login' : 'create'} />
       </div>
     </div>
   );
