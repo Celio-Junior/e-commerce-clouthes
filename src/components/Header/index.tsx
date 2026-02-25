@@ -7,10 +7,7 @@ import UserSign from '../UserSign';
 import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
 
 export default function HeaderShop() {
-  // const [signUser, setSignUser] = useState(false);
   const [{ viewForm, setSignUser }] = useContextViewFormUser();
-
-  // const handleCloseSign = () => setSignUser(() => false);
 
   return (
     <header className="flex justify-between max-w-[90%] mx-auto p-6 relative">
@@ -32,6 +29,7 @@ export default function HeaderShop() {
           className="cursor-pointer transition-all hover:scale-105 relative"
         >
           <CircleUserRoundIcon size={30} />
+
           <span className="absolute -top-1 text-sm rounded-4xl bg-gray-900 text-gray-100 opacity-90 px-2">
             ?
           </span>

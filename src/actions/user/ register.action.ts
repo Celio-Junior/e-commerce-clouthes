@@ -1,22 +1,14 @@
 'use server';
 
-import { UserPublicDto, UserPublicDtoSchema } from '@/dto/User.dto';
+import { UserPublicDto } from '@/dto/User.dto';
+import { UserAction } from '@/interfaces/user/useAction.interface';
 import { CreateUserSchema } from '@/lib/validations/user.validation';
 import { userRepository } from '@/repository/user';
 import formateZodMessage from '@/utils/formate-zod-message.util';
-import { redirect } from 'next/navigation';
+
 import bcryptjs from 'bcryptjs';
 
-type CreateUserAction = {
-  errors: string[];
-  formState: UserPublicDtoSchema;
-  success: boolean;
-};
-
-export default async function registerAction(
-  state: CreateUserAction,
-  formData: FormData,
-): Promise<CreateUserAction> {
+export default async function registerAction(state: UserAction, formData: FormData): Promise<UserAction> {
   if (!(formData instanceof FormData)) {
     return {
       errors: ['dados invalido'],
@@ -24,6 +16,7 @@ export default async function registerAction(
       success: false,
     };
   }
+
   const formObj = Object.fromEntries(formData.entries());
 
   const validUser = CreateUserSchema.safeParse(formObj);
@@ -45,13 +38,21 @@ export default async function registerAction(
       formState: UserPublicDto.parse(validUser.data),
       errors: [],
       success: true,
+      actionType: 'CREATE_USER',
     };
   } catch (e) {
-    console.error(e);
+    if (e instanceof Error) {
+      return {
+        errors: [e.message],
+        formState: UserPublicDto.parse(formObj),
+        success: false,
+      };
+    }
+
     return {
       errors: ['deu merda'],
-      success: false,
       formState: UserPublicDto.parse(formObj),
+      success: false,
     };
   }
 }

@@ -3,51 +3,57 @@
 import registerAction from '@/actions/user/ register.action';
 import Button from '../Button';
 import Input from '../Input';
-import { useActionState, useEffect } from 'react';
+import { ChangeEvent, useActionState, useEffect, useState } from 'react';
 import { UserPublicDto } from '@/dto/User.dto';
 import { toast } from 'react-toastify';
 import clsx from 'clsx';
-import LoginAction from '@/actions/user/login.action';
+import loginAction from '@/actions/user/login.action';
 import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
 
-type FormUserSingProps = {
-  typeMethod: 'create' | 'login';
-};
-
-export default function FormUserSing({ typeMethod }: FormUserSingProps) {
-  const isSignup = typeMethod === 'create' ? true : false;
-  const [{ setSignUser }, { setIsViewFormLogin }] = useContextViewFormUser();
+export default function FormUserSing() {
+  const [{ setSignUser }, { isViewFormLogin, setIsViewFormLogin }] = useContextViewFormUser();
   const methodActionsUser = {
     create: registerAction,
-    login: LoginAction,
+    login: loginAction,
   };
-  const [state, action, isPending] = useActionState(methodActionsUser[typeMethod], {
+  const [state, action, isPending] = useActionState(methodActionsUser[isViewFormLogin ? 'create' : 'login'], {
     errors: [],
     formState: UserPublicDto.parse({}),
     success: false,
   });
 
+  const [phone, setPhone] = useState(state.formState.phone);
+
   useEffect(() => {
     if (state.errors.length !== 0) state.errors.forEach((err) => toast.error(err, { toastId: err }));
 
-    if (state.success && typeMethod === 'create') {
-      toast.success('User create with success', {
-        toastId: 'success user created',
-      });
-
-      setIsViewFormLogin((prev) => !prev);
-    } else if (state.success) {
+    if (state.success && state.actionType === 'LOGIN_USER') {
       toast.success('Login success', {
         toastId: 'login success',
       });
 
       setSignUser((prev) => !prev);
     }
-  }, [setSignUser, state, typeMethod, setIsViewFormLogin]);
+    if (state.success && state.actionType === 'CREATE_USER') {
+      toast.success('User create with success', {
+        toastId: 'success user created',
+      });
+
+      setIsViewFormLogin((prev) => !prev);
+    }
+  }, [setSignUser, state, setIsViewFormLogin]);
+
+  function handleChangeInputPhone(e: ChangeEvent<HTMLInputElement>) {
+    const phoneValue = e.target.value.trim();
+    if (phoneValue.match(/\D/)) return;
+    if (phoneValue.length > 11) return;
+    console.log('passei');
+    setPhone(() => phoneValue);
+  }
 
   return (
     <form className="flex flex-col" action={action}>
-      {isSignup && (
+      {isViewFormLogin && (
         <Input defaultValue={state.formState.name} name="name" placeholder="ex: Fulano souza">
           Name
         </Input>
@@ -60,17 +66,25 @@ export default function FormUserSing({ typeMethod }: FormUserSingProps) {
       >
         email
       </Input>
-      {isSignup && (
-        <Input defaultValue={state.formState.phone} name="phone" placeholder="ex: 99991737513" type="number">
+      {isViewFormLogin && (
+        <Input
+          // defaultValue={state.formState.phone}
+
+          onChange={handleChangeInputPhone}
+          name="phone"
+          placeholder="ex: 99991737513"
+          type="text"
+          value={phone}
+        >
           Phone(Optional)
         </Input>
       )}
 
-      <div className={clsx('grid gap-2', isSignup && 'grid-cols-2')}>
+      <div className={clsx('grid gap-2', isViewFormLogin && 'grid-cols-2')}>
         <Input defaultValue={''} name="password" placeholder="ex: store23" type="password">
           Password
         </Input>
-        {isSignup && (
+        {isViewFormLogin && (
           <Input
             defaultValue={''}
             name="repPassword"
@@ -83,7 +97,7 @@ export default function FormUserSing({ typeMethod }: FormUserSingProps) {
       </div>
 
       <Button disabled={isPending} type="submit" className="mt-6 " variant="confirm">
-        {!isSignup ? 'Login' : 'Create account'}
+        {!isViewFormLogin ? 'Login' : 'Create account'}
       </Button>
     </form>
   );

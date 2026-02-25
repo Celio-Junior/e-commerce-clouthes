@@ -1,21 +1,14 @@
 'use server';
-import { UserPublicDto, UserPublicDtoSchema } from '@/dto/User.dto';
+
+import { UserPublicDto } from '@/dto/User.dto';
+import { UserAction } from '@/interfaces/user/useAction.interface';
+import { createLoginSession, createTokenJwt } from '@/lib/login/manage';
 import { LoginUserSchema } from '@/lib/validations/user.validation';
 import { userRepository } from '@/repository/user';
 import formateZodMessage from '@/utils/formate-zod-message.util';
 import bcrypt from 'bcryptjs';
-import { redirect } from 'next/navigation';
 
-type LoginUserAction = {
-  errors: string[];
-  formState: UserPublicDtoSchema;
-  success: boolean;
-};
-
-export default async function LoginAction(
-  state: LoginUserAction,
-  formData: FormData,
-): Promise<LoginUserAction> {
+export default async function loginAction(state: UserAction, formData: FormData): Promise<UserAction> {
   if (!(formData instanceof FormData)) {
     return {
       errors: ['dados invalido'],
@@ -24,7 +17,6 @@ export default async function LoginAction(
     };
   }
   const formObj = Object.fromEntries(formData.entries());
-
   const validUser = LoginUserSchema.safeParse(formObj);
 
   if (!validUser.success) {
@@ -41,19 +33,29 @@ export default async function LoginAction(
 
     if (!validPassword) throw new Error('Password invalid');
 
+    const token = await createTokenJwt({ id: user.id });
+
+    await createLoginSession(token);
+
     return {
       formState: UserPublicDto.parse(validUser.data),
       errors: [],
       success: true,
+      actionType: 'LOGIN_USER',
     };
-  } catch (e) {
-    console.error(e);
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      return {
+        errors: [e.message],
+        formState: UserPublicDto.parse(formObj),
+        success: false,
+      };
+    }
+
     return {
       errors: ['deu merda'],
       formState: UserPublicDto.parse(formObj),
       success: false,
     };
   }
-
-  // redirect('/');
 }

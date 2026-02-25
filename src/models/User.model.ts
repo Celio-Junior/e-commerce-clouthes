@@ -1,6 +1,6 @@
 // import { SequelizeInit } from '@/database';
 import { SequelizeInit } from '@/database';
-import { UserCreateAttributes, UserModel } from '@/interfaces/UserModel.interface';
+import { UserCreateAttributes, UserModel } from '@/interfaces/user/UserModel.interface';
 
 import { Column, CreatedAt, DataType, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 

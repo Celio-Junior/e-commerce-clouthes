@@ -11,5 +11,6 @@ export function SequelizeInit<T extends ModelCtor>(classTest: T) {
     sequelize.addModels([classTest]);
     registerModels.add(classTest);
   }
+  console.log('DATABASE');
 }
 await sequelize.sync({ alter: true });
