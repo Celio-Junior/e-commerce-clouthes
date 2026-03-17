@@ -50,7 +50,7 @@ export default function UserSign() {
           />
         </div>
 
-        <Sign actionUser={isViewFormLogin ? 'login' : 'create'} />
+        <Sign />
       </div>
     </div>
   );

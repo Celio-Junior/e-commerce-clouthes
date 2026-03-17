@@ -1,26 +1,30 @@
 'use client';
 
-import registerAction from '@/actions/user/ register.action';
 import Button from '../Button';
 import Input from '../Input';
 import { ChangeEvent, useActionState, useEffect, useState } from 'react';
 import { UserPublicDto } from '@/dto/User.dto';
 import { toast } from 'react-toastify';
 import clsx from 'clsx';
+import registerAction from '@/actions/user/ register.action';
 import loginAction from '@/actions/user/login.action';
 import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
+import { UserAction } from '@/interfaces/user/useAction.interface';
 
 export default function FormUserSing() {
   const [{ setSignUser }, { isViewFormLogin, setIsViewFormLogin }] = useContextViewFormUser();
-  const methodActionsUser = {
-    create: registerAction,
-    login: loginAction,
-  };
-  const [state, action, isPending] = useActionState(methodActionsUser[isViewFormLogin ? 'create' : 'login'], {
-    errors: [],
-    formState: UserPublicDto.parse({}),
-    success: false,
-  });
+
+  const [state, action, isPending] = useActionState(
+    (prevState: UserAction, formData: FormData) => {
+      const currentAction = isViewFormLogin ? registerAction : loginAction;
+      return currentAction(prevState, formData);
+    },
+    {
+      errors: [],
+      formState: UserPublicDto.parse({}),
+      success: false,
+    },
+  );
 
   const [phone, setPhone] = useState(state.formState.phone);
 
@@ -47,18 +51,24 @@ export default function FormUserSing() {
     const phoneValue = e.target.value.trim();
     if (phoneValue.match(/\D/)) return;
     if (phoneValue.length > 11) return;
-    console.log('passei');
+
     setPhone(() => phoneValue);
   }
 
   return (
-    <form className="flex flex-col" action={action}>
+    <form
+      onSubmit={() => console.log(isViewFormLogin ? 'create' : 'login')}
+      key={isViewFormLogin ? 'create' : 'login'}
+      className="flex flex-col"
+      action={action}
+    >
       {isViewFormLogin && (
         <Input defaultValue={state.formState.name} name="name" placeholder="ex: Fulano souza">
           Name
         </Input>
       )}
       <Input
+        //TODO acho que tem mudar isso
         defaultValue={state.formState.email}
         name="email"
         placeholder="example123@gmail.com"

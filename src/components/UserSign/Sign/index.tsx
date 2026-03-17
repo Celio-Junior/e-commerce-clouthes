@@ -4,25 +4,21 @@ import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
 import Link from 'next/link';
 import { MouseEvent } from 'react';
 
-type SignProps = {
-  actionUser: 'login' | 'create';
-};
-
-//TODO terminar estilização do form
-export default function Sign({ actionUser }: SignProps) {
-  const [, { setIsViewFormLogin }] = useContextViewFormUser();
+export default function Sign() {
+  const [, { setIsViewFormLogin, isViewFormLogin }] = useContextViewFormUser();
   const handleClickDirection = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
+    //TODO consertar essa mudança de state de paginas
     setIsViewFormLogin((prev) => !prev);
   };
   return (
     <div className="w-[60%] h-full max-w-xl p-4 flex flex-col items-center justify-evenly ">
       <div className="w-full">
         <h2 className="text-4xl font-bold text-gray-950 text-center">
-          {actionUser === 'login' ? 'Welcome Back' : 'Create your account'}
+          {!isViewFormLogin ? 'Welcome Back' : 'Create your account'}
         </h2>
         <p className="text-sm text-gray-500 ml-4 my-4">
-          {actionUser === 'login'
+          {!isViewFormLogin
             ? 'Fill in your information to log in.'
             : 'Create your account with us now to stay more fashionable.'}
         </p>
@@ -33,14 +29,14 @@ export default function Sign({ actionUser }: SignProps) {
       <p className="text-sm text-gray-500 text-center">or enter</p>
       <ButtonSocial />
       <span className=" text-center mt-3">
-        {actionUser === 'login' ? 'Don´t have account?' : 'Already have account?'}
+        {!isViewFormLogin ? 'Don´t have account?' : 'Already have account?'}
 
         <Link
           onClick={handleClickDirection}
           className="text-gray-600 font-semibold underline hover:text-gray-800"
           href={'/'}
         >
-          {actionUser === 'login' ? 'Create account' : 'Login'}
+          {!isViewFormLogin ? 'Create account' : 'Login'}
         </Link>
       </span>
     </div>

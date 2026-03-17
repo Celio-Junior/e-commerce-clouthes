@@ -4,7 +4,7 @@ import { ViewFormUserContext } from './config';
 
 export default function ViewFormUser({ children }: { children: React.ReactNode }) {
   const [signUser, setSignUser] = useState(false);
-  const [isViewFormLogin, setIsViewFormLogin] = useState(true);
+  const [isViewFormLogin, setIsViewFormLogin] = useState(false);
   return (
     <ViewFormUserContext.Provider
       value={[

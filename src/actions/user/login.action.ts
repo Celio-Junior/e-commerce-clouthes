@@ -18,7 +18,7 @@ export default async function loginAction(state: UserAction, formData: FormData)
   }
   const formObj = Object.fromEntries(formData.entries());
   const validUser = LoginUserSchema.safeParse(formObj);
-
+  console.log(formObj);
   if (!validUser.success) {
     return {
       formState: UserPublicDto.parse(formObj),
@@ -31,7 +31,7 @@ export default async function loginAction(state: UserAction, formData: FormData)
     const user = await userRepository.findOneEmail(validUser.data.email);
     const validPassword = await bcrypt.compare(validUser.data.password, user.password);
 
-    if (!validPassword) throw new Error('Password invalid');
+    if (!validPassword) throw new Error('Email ou Password invalid');
 
     const token = await createTokenJwt({ id: user.id });
 

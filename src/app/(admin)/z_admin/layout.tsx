@@ -4,7 +4,7 @@ type RootAdminProps = Readonly<{
   children: React.ReactNode;
 }>;
 export default async function RootAdmin({ children }: RootAdminProps) {
-  const isNavUrl = (await headers()).get('x-path');
+  const isNavUrl = (await headers()).get('x-path-admin');
 
   return (
     <>
