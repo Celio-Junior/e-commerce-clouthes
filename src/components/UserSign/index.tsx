@@ -7,7 +7,7 @@ import { CircleXIcon } from 'lucide-react';
 import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
 
 export default function UserSign() {
-  const [{ setSignUser }, { isViewFormLogin }] = useContextViewFormUser();
+  const [{ setSignUser }, { isViewFormLogin, setIsViewFormLogin }] = useContextViewFormUser();
 
   return (
     <div
@@ -31,7 +31,10 @@ export default function UserSign() {
       >
         <span
           className="absolute right-3 top-2 cursor-pointer transition hover:scale-105"
-          onClick={() => setSignUser(() => false)}
+          onClick={() => {
+            setSignUser(() => false);
+            setIsViewFormLogin(false);
+          }}
         >
           <CircleXIcon size={30} />
         </span>

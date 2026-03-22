@@ -1,3 +1,11 @@
+import clsx from 'clsx';
+
 export default function HeaderAdmin() {
-  return <>teste header</>;
+  return (
+    <div className={clsx('w-full')}>
+      <h1 title="titulo/logo">NEXA</h1>
+
+      <div>settings</div>
+    </div>
+  );
 }

@@ -2,7 +2,7 @@
 
 import { UserPublicDto } from '@/dto/User.dto';
 import { UserAction } from '@/interfaces/user/useAction.interface';
-import { createLoginSession, createTokenJwt } from '@/lib/login/manage';
+import { createLoginSession, createTokenJwt } from '@/lib/login/manage-user';
 import { LoginUserSchema } from '@/lib/validations/user.validation';
 import { userRepository } from '@/repository/user';
 import formateZodMessage from '@/utils/formate-zod-message.util';
@@ -18,7 +18,7 @@ export default async function loginAction(state: UserAction, formData: FormData)
   }
   const formObj = Object.fromEntries(formData.entries());
   const validUser = LoginUserSchema.safeParse(formObj);
-  console.log(formObj);
+
   if (!validUser.success) {
     return {
       formState: UserPublicDto.parse(formObj),
@@ -33,9 +33,9 @@ export default async function loginAction(state: UserAction, formData: FormData)
 
     if (!validPassword) throw new Error('Email ou Password invalid');
 
-    const token = await createTokenJwt({ id: user.id });
+    const token = await createTokenJwt(user.id);
 
-    await createLoginSession(token);
+    await createLoginSession(token, 'user');
 
     return {
       formState: UserPublicDto.parse(validUser.data),
