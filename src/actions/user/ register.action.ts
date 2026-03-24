@@ -4,7 +4,7 @@ import { UserPublicDto } from '@/dto/User.dto';
 import { UserAction } from '@/interfaces/user/useAction.interface';
 import { CreateUserSchema } from '@/lib/validations/user.validation';
 import { userRepository } from '@/repository/user';
-import formateZodMessage from '@/utils/formate-zod-message.util';
+import { formatZodMessage } from '@/utils/formats-functions';
 
 import bcryptjs from 'bcryptjs';
 
@@ -24,12 +24,12 @@ export default async function registerAction(state: UserAction, formData: FormDa
   if (!validUser.success) {
     return {
       formState: UserPublicDto.parse(formObj),
-      errors: formateZodMessage(validUser.error),
+      errors: formatZodMessage(validUser.error),
       success: false,
     };
   }
 
-  //consertar isso(acho criando serviço pra ficar dinamico)
+  //consertar isso(acho criando serviço pra ficar dinâmico)
   validUser.data.password = await bcryptjs.hash(validUser.data.password, 8);
 
   try {

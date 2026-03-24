@@ -5,7 +5,7 @@ import { UserAction } from '@/interfaces/user/useAction.interface';
 import { createLoginSession, createTokenJwt } from '@/lib/login/manage-user';
 import { LoginUserSchema } from '@/lib/validations/user.validation';
 import { userRepository } from '@/repository/user';
-import formateZodMessage from '@/utils/formate-zod-message.util';
+import { formatZodMessage } from '@/utils/formats-functions';
 import bcrypt from 'bcryptjs';
 
 export default async function loginAction(state: UserAction, formData: FormData): Promise<UserAction> {
@@ -22,7 +22,7 @@ export default async function loginAction(state: UserAction, formData: FormData)
   if (!validUser.success) {
     return {
       formState: UserPublicDto.parse(formObj),
-      errors: formateZodMessage(validUser.error),
+      errors: formatZodMessage(validUser.error),
       success: false,
     };
   }

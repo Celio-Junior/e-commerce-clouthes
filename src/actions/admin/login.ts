@@ -2,7 +2,7 @@
 
 import { createLoginSession, createTokenJwtAdmin } from '@/lib/login/manage-user';
 import { AdminUserLoginSchema } from '@/lib/validations/admin-user';
-import formateZodMessage from '@/utils/formate-zod-message.util';
+import { formatZodMessage } from '@/utils/formats-functions';
 import env from 'env-var';
 import { redirect } from 'next/navigation';
 type AdminLoginActionType = {
@@ -24,7 +24,7 @@ export default async function loginAdmin(formData: FormData): Promise<AdminLogin
 
   if (!validUser.success) {
     return {
-      errors: formateZodMessage(validUser.error),
+      errors: formatZodMessage(validUser.error),
       success: false,
     };
   }

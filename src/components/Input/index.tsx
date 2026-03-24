@@ -1,5 +1,5 @@
 'use client';
-import { clsx } from 'clsx';
+import { cn } from '@/utils/formats-functions';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import React, { ComponentPropsWithRef, useState } from 'react';
 
@@ -9,7 +9,7 @@ type InputProps = {
 
 export default function Input({ type = 'text', className, children, name, ...rest }: InputProps) {
   const [isViewPassword, setIsViewPassword] = useState(false);
-  const inputDivClass = clsx('flex flex-col gap-2 mt-2');
+  const inputDivClass = cn('flex flex-col gap-2 mt-2');
 
   const handleClick = () => setIsViewPassword((prev) => !prev);
   return (
@@ -21,8 +21,8 @@ export default function Input({ type = 'text', className, children, name, ...res
         <input
           type={isViewPassword ? 'text' : type}
           name={name}
-          className={clsx(
-            'border-2 rounded-lg py-1 px-2 w-full bg-gray-300/40',
+          className={cn(
+            'border-2 rounded-lg py-1 px-2 w-full bg-gray-100/70',
             'placeholder:text-gray-400 placeholder:font-light text-gray-800 font-semibold',
             className,
           )}

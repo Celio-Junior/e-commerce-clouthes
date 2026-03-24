@@ -1,6 +1,6 @@
 import { UserCreateAttributes, UserModel } from '@/interfaces/user/UserModel.interface';
 import { UserRepositoryInterface } from '@/interfaces/user/UserRepository.interface';
-import User from '@/models/User.model';
+import User from '@/models/User';
 //talvez criar serviços(regra de negócios) e hash pra senha
 class UserRepository implements UserRepositoryInterface {
   async findOne(user: Partial<UserCreateAttributes>): Promise<UserModel> {
