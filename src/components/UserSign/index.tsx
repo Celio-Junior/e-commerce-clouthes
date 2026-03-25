@@ -1,29 +1,30 @@
 'use client';
-import clsx from 'clsx';
+
 import Image from 'next/image';
 import Sign from './Sign';
 import { CircleXIcon } from 'lucide-react';
 
 import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
+import { cn } from '@/utils/formats-functions';
 
 export default function UserSign() {
   const [{ setSignUser }, { isViewFormLogin, setIsViewFormLogin }] = useContextViewFormUser();
-
+  console.log(isViewFormLogin);
   return (
     <div
-      className={clsx(
+      className={cn(
         'fixed',
         'w-full h-full bg-black/80 l-0 border-box left-0 top-0',
         'flex justify-center items-center',
       )}
     >
       <div
-        className={clsx(
+        className={cn(
           'bg-gray-200',
           'w-4xl',
           'transition',
-          !isViewFormLogin && 'h-[50%]',
-          isViewFormLogin && 'h-[70%]',
+          'h-[75%]',
+          !isViewFormLogin && 'h-[60%]',
           'rounded-2xl',
           'shadow-sm shadow-gray-200',
           'flex relative',

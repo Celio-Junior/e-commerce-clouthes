@@ -18,5 +18,5 @@ export async function proxy(request: NextRequest) {
 }
 //fazer o checagem se to logado na paginas
 export const config = {
-  matcher: ['/:path', '/z_admin/:path'],
+  matcher: ['/:path*', '/z_admin/:path*'],
 };

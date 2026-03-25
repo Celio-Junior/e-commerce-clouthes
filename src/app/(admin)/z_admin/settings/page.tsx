@@ -1,10 +1,10 @@
 import Button from '@/components/Button';
+import Container from '@/components/Container';
 import Input from '@/components/Input';
-import clsx from 'clsx';
 
 export default function SettingsPage() {
   return (
-    <div className={clsx('px-10')}>
+    <Container>
       <div className="">
         <h1 className="font-bold text-3xl">Manage store</h1>
         <p className="text-sm text-gray-500">Configurações gerais da loja</p>
@@ -12,6 +12,6 @@ export default function SettingsPage() {
       <Input className="w-80">Name store</Input>
 
       <Button className="mt-10">Save changes</Button>
-    </div>
+    </Container>
   );
 }

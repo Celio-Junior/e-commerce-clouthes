@@ -1,10 +1,11 @@
-import Button from '../Button';
+import Button from '..';
 import { FaGithub } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import clsx from 'clsx';
+
+import { cn } from '@/utils/formats-functions';
 
 export default function ButtonSocial() {
-  const buttonClassDefault = clsx(
+  const buttonClassDefault = cn(
     'border border-transparent flex justify-center w-[40%] shadow-sm shadow-gray-500 transition hover:border-gray-600 cursor-pointer active:bg-gray-400 hover:scale-105',
   );
   return (

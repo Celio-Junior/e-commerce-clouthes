@@ -1,4 +1,4 @@
-import ButtonSocial from '@/components/ButtonSocial';
+import ButtonSocial from '@/components/Button/Social';
 import FormUserSing from '@/components/FormUserSign';
 import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
 import Link from 'next/link';
