@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import clsx from 'clsx';
 
-export default function Settings() {
+export default function SettingsPage() {
   return (
     <div className={clsx('px-10')}>
       <div className="">

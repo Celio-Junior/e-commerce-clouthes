@@ -9,13 +9,13 @@ import clsx from 'clsx';
 import registerAction from '@/actions/user/ register.action';
 import loginAction from '@/actions/user/login.action';
 import { useContextViewFormUser } from '@/context/ViewFormUser/useContext';
-import { UserAction } from '@/interfaces/user/useAction.interface';
+import { UserActionInterface } from '@/interfaces/user/useAction';
 
 export default function FormUserSing() {
   const [{ setSignUser }, { isViewFormLogin, setIsViewFormLogin }] = useContextViewFormUser();
 
   const [state, action, isPending] = useActionState(
-    (prevState: UserAction, formData: FormData) => {
+    (prevState: UserActionInterface, formData: FormData) => {
       const currentAction = isViewFormLogin ? registerAction : loginAction;
       return currentAction(prevState, formData);
     },

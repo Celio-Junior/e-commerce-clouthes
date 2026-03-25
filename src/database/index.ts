@@ -1,5 +1,5 @@
 import { ModelCtor, Sequelize } from 'sequelize-typescript';
-import { configDb } from '../config/db.config';
+import { configDb } from '../config/db';
 
 export const sequelize = new Sequelize(configDb);
 // sequelize.addModels([User]);

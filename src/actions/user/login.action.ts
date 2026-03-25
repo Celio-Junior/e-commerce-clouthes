@@ -1,14 +1,17 @@
 'use server';
 
 import { UserPublicDto } from '@/dto/User.dto';
-import { UserAction } from '@/interfaces/user/useAction.interface';
+import { UserActionInterface } from '@/interfaces/user/useAction';
 import { createLoginSession, createTokenJwt } from '@/lib/login/manage-user';
 import { LoginUserSchema } from '@/lib/validations/user.validation';
 import { userRepository } from '@/repository/user';
 import { formatZodMessage } from '@/utils/formats-functions';
 import bcrypt from 'bcryptjs';
 
-export default async function loginAction(state: UserAction, formData: FormData): Promise<UserAction> {
+export default async function loginAction(
+  state: UserActionInterface,
+  formData: FormData,
+): Promise<UserActionInterface> {
   if (!(formData instanceof FormData)) {
     return {
       errors: ['dados invalido'],

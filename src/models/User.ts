@@ -1,6 +1,6 @@
 // import { SequelizeInit } from '@/database';
 import { SequelizeInit } from '@/database';
-import { UserCreateAttributes, UserModel } from '@/interfaces/user/UserModel.interface';
+import { UserCreateAttributes, UserModelInterface } from '@/interfaces/user/UserModel';
 
 import { Column, CreatedAt, DataType, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 
@@ -11,7 +11,7 @@ import { Column, CreatedAt, DataType, Model, PrimaryKey, Table, UpdatedAt } from
   modelName: 'User',
   underscored: true,
 })
-export default class User extends Model<UserModel, UserCreateAttributes> {
+export default class User extends Model<UserModelInterface, UserCreateAttributes> {
   @PrimaryKey
   @Column({
     allowNull: false,
