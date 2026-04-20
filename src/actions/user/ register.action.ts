@@ -2,7 +2,7 @@
 
 import { UserPublicDto } from '@/dto/User.dto';
 import { UserActionInterface } from '@/interfaces/user/useAction';
-import { CreateUserSchema } from '@/lib/validations/user.validation';
+import { CreateUserSchema } from '@/lib/validations/user';
 import { userRepository } from '@/repository/user';
 import { formatZodMessage } from '@/utils/formats-functions';
 

@@ -1,5 +1,5 @@
 import { UserCreateAttributes, UserModelInterface } from '@/interfaces/user/UserModel';
-import { UserRepositoryInterface } from '@/interfaces/user/UserRepository.interface';
+import { UserRepositoryInterface } from '@/interfaces/user/UserRepository';
 import User from '@/models/User';
 //talvez criar serviços(regra de negócios) e hash pra senha
 class UserRepository implements UserRepositoryInterface {

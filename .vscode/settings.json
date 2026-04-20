@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["jose", "NEXA", "UUIDV"]
+  "cSpell.words": ["cloudinary", "clouth", "jose", "NEXA", "UUIDV"],
+  "remote.autoForwardPortsFallback": 0
 }

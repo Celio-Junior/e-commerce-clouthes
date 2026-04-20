@@ -16,10 +16,10 @@ export default function Button({
   ...rest
 }: ButtonProps) {
   const buttonDefault = cn(
-    'text-xl  rounded-2xl hover:scale-105 cursor-pointer transition flex items-center justify-center',
+    'text-xl gap-2  rounded-2xl hover:scale-105 cursor-pointer transition flex items-center justify-center',
   );
   const buttonVariantes: Record<NonNullable<ButtonProps['variant']>, string> = {
-    confirm: cn('bg-gray-950 text-gray-50 hover:bg-gray-900'),
+    confirm: cn('bg-blue-600 text-gray-50 hover:bg-gray-900'),
     customize: '',
     default: cn('bg-gray-950 text-gray-50 hover:bg-gray-900'),
   };

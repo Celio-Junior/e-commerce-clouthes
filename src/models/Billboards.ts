@@ -1,5 +1,5 @@
 import { SequelizeInit } from '@/database';
-import { BillboardModelInterface } from '@/interfaces/billboard/BillboardModel';
+import { BillboardModelInterface } from '@/interfaces/Billboard.interface';
 import { Column, CreatedAt, DataType, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 
 @SequelizeInit

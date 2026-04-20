@@ -3,7 +3,7 @@
 import { UserPublicDto } from '@/dto/User.dto';
 import { UserActionInterface } from '@/interfaces/user/useAction';
 import { createLoginSession, createTokenJwt } from '@/lib/login/manage-user';
-import { LoginUserSchema } from '@/lib/validations/user.validation';
+import { LoginUserSchema } from '@/lib/validations/user';
 import { userRepository } from '@/repository/user';
 import { formatZodMessage } from '@/utils/formats-functions';
 import bcrypt from 'bcryptjs';
