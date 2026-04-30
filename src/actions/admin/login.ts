@@ -34,7 +34,7 @@ export default async function loginAdmin(formData: FormData): Promise<AdminLogin
 
   if (isEmail || isPassword) {
     return {
-      errors: ['email e senha inválida'],
+      errors: ['Email ou senha inválida'],
       success: false,
     };
   }

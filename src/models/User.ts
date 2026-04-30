@@ -1,10 +1,10 @@
 // import { SequelizeInit } from '@/database';
-import { SequelizeInit } from '@/database';
+
 import { UserCreateAttributes, UserModelInterface } from '@/interfaces/user/UserModel';
 
 import { Column, CreatedAt, DataType, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
 
-@SequelizeInit
+// @SequelizeInit
 @Table({
   timestamps: true,
   tableName: 'users',

@@ -7,22 +7,23 @@ import Input from '../Input';
 
 import { toast } from 'react-toastify';
 
-import billboardAction from '@/actions/billboard/billboard.action';
+import billboardAction from '@/actions/billboard/billboard-create.action';
 
 //acho que vou colocar id
 
 export type ImagesBillboardType = {
+  id: null | string;
   url: string;
   isActive: boolean;
 };
 
 type FormBillboardProps = {
-  billboardsImgs: string[];
+  billboardsImgs: Omit<ImagesBillboardType, 'isActive'>[];
 };
 
 export default function FormBillboard({ billboardsImgs }: FormBillboardProps) {
   const [showImagesUrl, setShowImagesUrl] = useState<ImagesBillboardType[]>(
-    billboardsImgs.map((url) => ({ isActive: false, url })),
+    billboardsImgs.map((imageSelect) => ({ isActive: false, url: imageSelect.url, id: imageSelect.id })),
   );
   const labelText = useRef<HTMLInputElement>(null);
   const [isTransitionBillboard, startTransitionBillboard] = useTransition();
@@ -37,17 +38,24 @@ export default function FormBillboard({ billboardsImgs }: FormBillboardProps) {
 
     if (!imageUrl) return toast.error('Please select an image', { toastId: 'error image' });
 
-    const data = { image_url: imageUrl.url, label: labelText.current?.value ?? '' };
+    const data = { image_url: imageUrl.url, label: labelText.current?.value ?? '', id: imageUrl.id };
 
     startTransitionBillboard(async () => {
-      const { errors, success } = await billboardAction(data);
-      if (!success && errors.length > 0) return errors.forEach((err) => toast.error(err, { toastId: err }));
+      const billboardResponse = await billboardAction(data);
+      if (!billboardResponse.success && billboardResponse.errors.length > 0)
+        return billboardResponse.errors.forEach((err) => toast.error(err, { toastId: err }));
 
-      if (success) toast.success('Billboard create with success', { toastId: 'success billboard created' });
+      if (billboardResponse.success) {
+        toast.success('Billboard create with success', { toastId: 'success billboard created' });
+        setShowImagesUrl((imgSelect) => {
+          imgSelect[imgSelect.length - 1].id = billboardResponse.data;
+          return imgSelect;
+        });
+      }
     });
   }
   return (
-    <form onSubmit={handleSubmit} className="shadow-sm shadow-gray-300 px-1 py-3 rounded-2xl" action="">
+    <form onSubmit={handleSubmit} className="shadow-sm shadow-gray-100 px-1 py-3 rounded-2xl" action="">
       <ImageUpload showImagesUrl={showImagesUrl} setShowImagesUrl={setShowImagesUrl} />
 
       <Input

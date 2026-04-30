@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const BillboardFormSchema = z.object({
+  id: z.string().nullable().default(null),
   label: z.string().trim().min(6, 'The label must have at least 6 characters.'),
   image_url: z
     .string()

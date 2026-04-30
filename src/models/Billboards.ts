@@ -1,28 +1,37 @@
-import { SequelizeInit } from '@/database';
-import { BillboardModelInterface } from '@/interfaces/Billboard.interface';
-import { Column, CreatedAt, DataType, Model, PrimaryKey, Table, UpdatedAt } from 'sequelize-typescript';
+import { BillboardModelType } from '@/interfaces/Billboard.interface';
+import {
+  BelongsTo,
+  Column,
+  CreatedAt,
+  DataType,
+  ForeignKey,
+  Model,
+  PrimaryKey,
+  Table,
+  UpdatedAt,
+} from 'sequelize-typescript';
+import ImageBillboard from './ImageBillboard';
 
-@SequelizeInit
 @Table({
   underscored: true,
   timestamps: true,
   tableName: 'billboards',
   modelName: 'Billboard',
 })
-export default class Billboard extends Model<BillboardModelInterface, Omit<BillboardModelInterface, 'id'>> {
+export default class Billboard extends Model<BillboardModelType, Omit<BillboardModelType, 'id'>> {
   @PrimaryKey
   @Column({ allowNull: false, type: DataType.UUIDV4, defaultValue: DataType.UUIDV4 })
   declare id: string;
+
   @Column({
     type: DataType.STRING(80),
     allowNull: false,
   })
   declare label: string;
-  @Column({
-    type: DataType.STRING(150),
-    allowNull: false,
-  })
-  declare image_url: string;
+
+  @ForeignKey(() => ImageBillboard)
+  @Column({ allowNull: false, type: DataType.UUIDV4 })
+  declare image_id: string;
 
   // declare categories: string[];
   @CreatedAt
@@ -30,4 +39,7 @@ export default class Billboard extends Model<BillboardModelInterface, Omit<Billb
 
   @UpdatedAt
   declare updatedAt: Date;
+
+  @BelongsTo(() => ImageBillboard, 'image_id')
+  declare images: ImageBillboard;
 }

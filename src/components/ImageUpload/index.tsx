@@ -15,9 +15,10 @@ const ImageUpload = ({ setShowImagesUrl, showImagesUrl }: ImageUploadProps) => {
     setShowImagesUrl((prevImages) => [
       ...prevImages.map((image) => ({
         url: image.url,
+        id: null,
         isActive: false,
       })),
-      { url: newUrl, isActive: true },
+      { url: newUrl, isActive: true, id: null },
     ]);
   };
 
