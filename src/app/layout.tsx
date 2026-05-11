@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
 
-import './globals.css';
+import './global.css';
 
 import { Bounce, ToastContainer } from 'react-toastify';
+import { Geist } from 'next/font/google';
+import { cn } from '@/lib/utils';
+
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'Store',
@@ -15,7 +19,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={cn('font-sans', geist.variable)}>
       <body className="">
         <ToastContainer
           position="top-center"

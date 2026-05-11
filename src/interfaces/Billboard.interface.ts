@@ -3,23 +3,31 @@ export type BillboardModelType = {
   id: string;
   label: string;
   image_id: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
+export type BillboardPublicType = Omit<BillboardModelType, 'createdAt' | 'updatedAt' | 'id'>;
 export type ImgModelType = {
   id: string;
   url: string;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
+export type ImgPublicType = Omit<ImgModelType, 'createdAt' | 'updatedAt'>;
 //Repository
-export type ImgAttributesType = Omit<ImgModelType, 'id'>;
-export type BillAttributesType = Pick<BillboardModelType, 'label'>;
-export type BillCreateAtributesType = BillAttributesType & { image_url: string; image_id: string | null };
+
+export type BillCreateAtributesType = Pick<BillboardPublicType, 'label' | 'image_id'> & { image_url: string };
 
 export type BillboardRepositoryInterface = {
   create(BillboardCreate: BillCreateAtributesType): Promise<string>;
-  findAll(): Promise<BillboardModelType[]>;
-  findAllImages(): Promise<ImgModelType[]>;
-  findOne(billboard: Partial<BillboardModelType>): Promise<BillAttributesType>;
-  update(): void;
+  // findAll(): Promise<BillboardModelType[]>;
+  findAllPublic(): Promise<BillboardModelType[]>;
+  findAllImages(): Promise<ImgPublicType[]>;
+  findOne(billboard: Partial<BillboardModelType>): Promise<BillboardPublicType>;
+  findById(id: string): Promise<BillboardModelType>;
+  update(id: string, data: BillCreateAtributesType): Promise<string>;
+  remove(id: string): Promise<void>;
 };
 
 //action

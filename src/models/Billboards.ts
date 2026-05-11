@@ -1,4 +1,4 @@
-import { BillboardModelType } from '@/interfaces/Billboard.interface';
+import { BillboardModelType, BillboardPublicType } from '@/interfaces/Billboard.interface';
 import {
   BelongsTo,
   Column,
@@ -18,7 +18,7 @@ import ImageBillboard from './ImageBillboard';
   tableName: 'billboards',
   modelName: 'Billboard',
 })
-export default class Billboard extends Model<BillboardModelType, Omit<BillboardModelType, 'id'>> {
+export default class Billboard extends Model<BillboardModelType, BillboardPublicType> {
   @PrimaryKey
   @Column({ allowNull: false, type: DataType.UUIDV4, defaultValue: DataType.UUIDV4 })
   declare id: string;
@@ -30,7 +30,7 @@ export default class Billboard extends Model<BillboardModelType, Omit<BillboardM
   declare label: string;
 
   @ForeignKey(() => ImageBillboard)
-  @Column({ allowNull: false, type: DataType.UUIDV4 })
+  @Column({ allowNull: false, type: DataType.STRING })
   declare image_id: string;
 
   // declare categories: string[];

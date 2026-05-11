@@ -6,6 +6,10 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [{ hostname: 'res.cloudinary.com' }],
   },
+  cacheComponents: true,
+  // experimental: {
+  //   cacheComponents: true,
+  // },
 };
 
 export default nextConfig;

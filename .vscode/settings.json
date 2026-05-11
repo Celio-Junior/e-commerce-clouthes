@@ -1,4 +1,5 @@
 {
   "cSpell.words": ["cloudinary", "clouth", "jose", "NEXA", "UUIDV"],
-  "remote.autoForwardPortsFallback": 0
+  "remote.autoForwardPortsFallback": 0,
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
 }

@@ -1,17 +1,19 @@
 'use client';
-import { CldUploadWidget, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
+import { CldUploadWidget } from 'next-cloudinary';
 import Button from '..';
 import { ImagePlusIcon } from 'lucide-react';
 
 type ButtonUploadProps = {
-  onUpload: (url: string) => void;
+  onUploadAction: (url: string, id: string) => void;
 };
 
-export default function ButtonUpload({ onUpload }: ButtonUploadProps) {
+export default function ButtonUpload({ onUploadAction }: ButtonUploadProps) {
   return (
     <CldUploadWidget
       onSuccess={(result) => {
-        onUpload((result.info as CloudinaryUploadWidgetInfo)?.secure_url);
+        console.log(result.info);
+        if (!result.info || typeof result.info === 'string') return;
+        onUploadAction(result.info.secure_url, result.info.public_id);
       }}
       uploadPreset="clouth-teste"
     >

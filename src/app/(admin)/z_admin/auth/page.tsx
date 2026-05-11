@@ -1,6 +1,6 @@
 import FormAuth from '@/components/admin/FormAuth';
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 export default function AuthPage() {
   return (
     <div className="w-2xl mt-40 mx-auto">

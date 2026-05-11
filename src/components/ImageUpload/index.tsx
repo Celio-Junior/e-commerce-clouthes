@@ -4,21 +4,20 @@ import ButtonUpload from '../Button/Upload';
 import Image from 'next/image';
 import { TrashIcon } from 'lucide-react';
 import { cn } from '@/utils/formats-functions';
-import { ImagesBillboardType } from '../FormBillboard';
+import { ImagesBillboardType } from '../admin/FormBillboard';
 
 type ImageUploadProps = {
   showImagesUrl: ImagesBillboardType[];
   setShowImagesUrl: React.Dispatch<React.SetStateAction<ImagesBillboardType[]>>;
 };
 const ImageUpload = ({ setShowImagesUrl, showImagesUrl }: ImageUploadProps) => {
-  const handleUpload = (newUrl: string) => {
+  const handleUpload = (newUrl: string, id: string) => {
     setShowImagesUrl((prevImages) => [
       ...prevImages.map((image) => ({
-        url: image.url,
-        id: null,
+        ...image,
         isActive: false,
       })),
-      { url: newUrl, isActive: true, id: null },
+      { url: newUrl, isActive: true, id },
     ]);
   };
 
@@ -44,7 +43,7 @@ const ImageUpload = ({ setShowImagesUrl, showImagesUrl }: ImageUploadProps) => {
           {showImagesUrl.map(({ url, isActive }, index) => (
             <div
               onClick={() => handleClickImageActive(isActive, index)}
-              key={crypto.randomUUID()}
+              key={index}
               className={cn(
                 'w-[250] h-[250]',
                 'rounded-2xl overflow-hidden',
@@ -62,7 +61,7 @@ const ImageUpload = ({ setShowImagesUrl, showImagesUrl }: ImageUploadProps) => {
         </div>
       )}
 
-      <ButtonUpload onUpload={handleUpload} />
+      <ButtonUpload onUploadAction={handleUpload} />
     </div>
   );
 };

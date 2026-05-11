@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-import './../globals.css';
+import '../global.css';
 import HeaderShop from '@/components/HeaderShop';
 import ViewFormUser from '@/context/ViewFormUser';
 

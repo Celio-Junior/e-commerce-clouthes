@@ -9,7 +9,7 @@ import {
   UpdatedAt,
 } from 'sequelize-typescript';
 import Billboard from './Billboards';
-import { ImgAttributesType, ImgModelType } from '@/interfaces/Billboard.interface';
+import { ImgModelType, ImgPublicType } from '@/interfaces/Billboard.interface';
 
 @Table({
   timestamps: true,
@@ -17,9 +17,9 @@ import { ImgAttributesType, ImgModelType } from '@/interfaces/Billboard.interfac
   modelName: 'ImageBillboards',
   tableName: 'imageBillboards',
 })
-export default class ImageBillboard extends Model<ImgModelType, ImgAttributesType> {
+export default class ImageBillboard extends Model<ImgModelType, ImgPublicType> {
   @PrimaryKey
-  @Column({ allowNull: false, type: DataType.UUIDV4, defaultValue: DataType.UUIDV4 })
+  @Column({ allowNull: false, type: DataType.STRING })
   declare id: string;
   @Column({ allowNull: false, type: DataType.STRING(180) })
   declare url: string;

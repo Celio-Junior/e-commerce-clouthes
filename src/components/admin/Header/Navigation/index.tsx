@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 export default function NavigationAdmin() {
   const pathname = usePathname();
   const linkNavigation = ['overview', 'billboards', 'categories', 'settings'];
-  console.log(pathname);
+
   return (
     <nav
       className={clsx(
@@ -23,7 +23,7 @@ export default function NavigationAdmin() {
               pathname.includes(`/${linkText}`) && 'scale-130 text-gray-800 mx-3',
             )}
             key={crypto.randomUUID()}
-            href={`/z_admin/${linkText}`}
+            href={`/z_admin/${linkText.match('overview') ? '' : linkText}`}
           >
             {linkText}
           </Link>
