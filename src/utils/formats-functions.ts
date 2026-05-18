@@ -6,5 +6,5 @@ export function formatZodMessage<T>(errors: ZodError<T>) {
 }
 
 export function cn(...classes: ClassValue[]) {
-  return twMerge(clsx(classes, 'ta'));
+  return twMerge(clsx(classes));
 }

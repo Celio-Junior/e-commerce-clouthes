@@ -1,4 +1,4 @@
-import FormAuth from '@/components/admin/FormAuth';
+import FormAuth from '@/components/admin/Form/FormAuth';
 
 // export const dynamic = 'force-dynamic';
 export default function AuthPage() {

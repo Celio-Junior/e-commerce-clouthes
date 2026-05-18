@@ -1,5 +1,5 @@
 import Container from '@/components/Container';
-import BillboardClient from './client';
+import CategoryClient from './client';
 
 import { BillBoardColumn } from './components/columns';
 import { billCacheAllBillboards } from '@/lib/cache/billboard';
@@ -15,7 +15,7 @@ export default async function BillboardsPage() {
   return (
     <Container>
       <Suspense fallback={null}>
-        <BillboardClient data={formattedBillboards} />
+        <CategoryClient data={formattedBillboards} />
       </Suspense>
     </Container>
   );

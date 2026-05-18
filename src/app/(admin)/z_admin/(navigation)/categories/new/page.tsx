@@ -1,18 +1,15 @@
+import FormCategory from '@/components/admin/Form/FormCategory';
 import Container from '@/components/Container';
-import FormBillboard from '@/components/admin/FormBillboard';
+
 import SubTitle from '@/components/Subtitle';
+import { billCacheAllBillboards } from '@/lib/cache/billboard';
 
-import { billCacheAllImages } from '@/lib/cache/billboard';
-import { Suspense } from 'react';
-
-export default async function BillboardNewPage() {
-  const billboardsImages = await billCacheAllImages();
+export default async function CategoryNewPage() {
+  const billboards = await billCacheAllBillboards();
   return (
     <Container>
-      <SubTitle title="Create billboard" description="Add new billboard" />
-      <Suspense fallback={null}>
-        <FormBillboard method="create" billboardsImgs={billboardsImages} />
-      </Suspense>
+      <SubTitle title="Create category" description="Add new category" />
+      <FormCategory billboards={billboards} method="create" />
     </Container>
   );
 }

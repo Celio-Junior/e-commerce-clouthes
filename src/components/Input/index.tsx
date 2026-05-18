@@ -1,4 +1,5 @@
 'use client';
+import { extractClassesStyles } from '@/utils/extract-classes-styles';
 import { cn } from '@/utils/formats-functions';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import React, { ComponentPropsWithRef, useState } from 'react';
@@ -7,9 +8,16 @@ type InputProps = {
   children: React.ReactNode;
 } & ComponentPropsWithRef<'input'>;
 
-export default function Input({ type = 'text', className, children, name, ...rest }: InputProps) {
+export default function Input({
+  type = 'text',
+
+  className = '',
+  children,
+  name,
+  ...rest
+}: InputProps) {
   const [isViewPassword, setIsViewPassword] = useState(false);
-  const inputDivClass = cn('flex flex-col gap-2 mt-2');
+  const inputDivClass = cn('flex flex-col gap-2 mt-2 w-full', extractClassesStyles(className, 'w', 'h'));
 
   const handleClick = () => setIsViewPassword((prev) => !prev);
   return (
@@ -22,7 +30,7 @@ export default function Input({ type = 'text', className, children, name, ...res
           type={isViewPassword ? 'text' : type}
           name={name}
           className={cn(
-            'border-2 rounded-lg py-1 px-2 w-full bg-gray-100/70',
+            'border-2 rounded-lg py-1 px-2 w-full bg-gray-100/10',
             'placeholder:text-gray-400 placeholder:font-light text-gray-800 font-semibold',
             className,
           )}

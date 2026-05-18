@@ -4,20 +4,21 @@ import SubTitle from '@/components/Subtitle';
 import { DataTable } from '@/components/ui/data-table';
 
 import { PlusIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { BillBoardColumn, columns } from './components/columns';
 
-type BillboardClientProps = {
+type CategoryClientProps = {
   data: BillBoardColumn[];
 };
-export default function BillboardClient({ data }: BillboardClientProps) {
+export default function CategoryClient({ data }: CategoryClientProps) {
   const router = useRouter();
+  const pathname = usePathname();
   return (
     <div>
       <div className="py-6 px-2 flex justify-between items-center  shadow-[0px_2px_3px_#dde] my-5">
-        <SubTitle title={`Categories (${data.length})`} description={'Manage Billboards for you store'} />
+        <SubTitle title={`Categories (${data.length})`} description={'Manage categories for you store'} />
 
-        <Button onClick={() => router.push('/z_admin/billboards/new')} size="xl" variant="default">
+        <Button onClick={() => router.push(`${pathname}/new`)} size="xl" variant="default">
           {'  '}
           <PlusIcon className="mr-2" /> Add New
         </Button>

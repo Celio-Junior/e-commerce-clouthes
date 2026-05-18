@@ -1,11 +1,12 @@
 import Container from '@/components/Container';
-import FormBillboard from '@/components/admin/FormBillboard';
+
 import SubTitle from '@/components/Subtitle';
 import { billCacheAllImages } from '@/lib/cache/billboard';
 import { billboardRepository } from '@/repository/billboard';
 import NotFoundPage from '@/app/(admin)/not-found';
 
 import { FC, Suspense } from 'react';
+import FormBillboard from '@/components/admin/Form/FormBillboard';
 
 type BillboardNewPageProps = { params: Promise<{ id: string }> };
 

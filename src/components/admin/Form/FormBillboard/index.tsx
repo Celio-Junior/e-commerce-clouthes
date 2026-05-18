@@ -1,9 +1,5 @@
 'use client';
 import { useRef, useState, useTransition } from 'react';
-import Button from '../../Button';
-
-import ImageUpload from '../../ImageUpload';
-import Input from '../../Input';
 
 import { toast } from 'react-toastify';
 
@@ -11,6 +7,9 @@ import billboardCreateAction from '@/actions/billboard/create.action';
 import { BillboardModelType } from '@/interfaces/Billboard.interface';
 import billboardUpdateAction from '@/actions/billboard/update.action';
 import { useRouter } from 'next/navigation';
+import ImageUpload from '@/components/ImageUpload';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
 
 //acho que vou colocar id
 
