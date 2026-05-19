@@ -7,7 +7,7 @@ import { billboardRepository } from '@/repository/billboard';
 import { formatZodMessage } from '@/utils/formats-functions';
 import { revalidateTag } from 'next/cache';
 
-export default async function billboardUpdateAction(
+export default async function categoryUpdateAction(
   data: BillboardUpdateFormType,
 ): Promise<BillboardActionType> {
   const validBillboardForm = BillboardUpdateFormSchema.safeParse(data);

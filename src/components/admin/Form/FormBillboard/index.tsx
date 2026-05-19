@@ -86,7 +86,7 @@ export default function FormBillboard({ billboardsImgs, method, billboard }: For
       >
         Label
       </Input>
-      <Button disabled={isTransitionBillboard} className="my-3">
+      <Button disabled={isTransitionBillboard} className="my-3 px-5 py-3">
         {method === 'create' ? 'Create' : 'Update'}
       </Button>
     </form>
