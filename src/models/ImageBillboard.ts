@@ -8,7 +8,7 @@ import {
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
-import Billboard from './Billboards';
+import Billboard from './Billboard';
 import { ImgModelType, ImgPublicType } from '@/interfaces/Billboard.interface';
 
 @Table({

@@ -5,8 +5,10 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { InputSelect } from '@/components/Input/InputSelect';
 import { BillboardModelType } from '@/interfaces/Billboard.interface';
-import { start } from 'repl';
+
 import categoryCreateAction from '@/actions/category/create.action';
+import categoryUpdateAction from '@/actions/category/update.action';
+import { toast } from 'react-toastify';
 
 //acho que vou colocar id
 
@@ -24,7 +26,7 @@ type FormCategoryProps = {
 export default function FormCategory({ method, billboards }: FormCategoryProps) {
   const nameCategoryInput = useRef<HTMLInputElement>(null);
   const billboardIdInput = useRef<string>('');
-
+  console.log(billboards);
   const [isTransitionCategory, startTransitionCategory] = useTransition();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -40,7 +42,16 @@ export default function FormCategory({ method, billboards }: FormCategoryProps) 
     startTransitionCategory(async () => {
       const categoryResponse = await (method === 'create'
         ? categoryCreateAction(data)
-        : categoryCreateAction(data));
+        : categoryUpdateAction(data));
+
+      if (!categoryResponse.success && categoryResponse.errors.length > 0)
+        return categoryResponse.errors.forEach((err) => toast.error(err, { toastId: err }));
+
+      if (categoryResponse.success) {
+        toast.success(method === 'create' ? 'Category create with success' : 'Category edited', {
+          toastId: `success category ${method === 'create' ? 'create' : 'edit'}`,
+        });
+      }
     });
   }
 

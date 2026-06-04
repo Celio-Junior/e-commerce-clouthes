@@ -9,7 +9,7 @@ import { cn } from '@/utils/formats-functions';
 
 export default function UserSign() {
   const [{ setSignUser }, { isViewFormLogin, setIsViewFormLogin }] = useContextViewFormUser();
-  console.log(isViewFormLogin);
+
   return (
     <div
       className={cn(

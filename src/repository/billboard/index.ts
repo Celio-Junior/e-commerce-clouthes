@@ -5,7 +5,7 @@ import {
   BillboardRepositoryInterface,
   ImgPublicType,
 } from '@/interfaces/Billboard.interface';
-import Billboard from '@/models/Billboards';
+import Billboard from '@/models/Billboard';
 import ImageBillboard from '@/models/ImageBillboard';
 import { Op } from 'sequelize';
 

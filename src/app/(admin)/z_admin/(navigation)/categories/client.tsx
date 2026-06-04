@@ -5,10 +5,10 @@ import { DataTable } from '@/components/ui/data-table';
 
 import { PlusIcon } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
-import { BillBoardColumn, columns } from './components/columns';
+import { CategoryColumn, columns } from './components/columns';
 
 type CategoryClientProps = {
-  data: BillBoardColumn[];
+  data: CategoryColumn[];
 };
 export default function CategoryClient({ data }: CategoryClientProps) {
   const router = useRouter();

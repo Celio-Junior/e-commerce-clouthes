@@ -5,12 +5,14 @@ import {
   CreatedAt,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
 import ImageBillboard from './ImageBillboard';
+import Category from './Category';
 
 @Table({
   underscored: true,
@@ -39,6 +41,9 @@ export default class Billboard extends Model<BillboardModelType, BillboardPublic
 
   @UpdatedAt
   declare updatedAt: Date;
+
+  @HasMany(() => Category, 'billboard_id')
+  declare categories: Category[];
 
   @BelongsTo(() => ImageBillboard, 'image_id')
   declare images: ImageBillboard;

@@ -1,5 +1,5 @@
 import Container from '@/components/Container';
-import FormBillboard from '@/components/admin/FormBillboard';
+
 import SubTitle from '@/components/Subtitle';
 import { billCacheAllImages } from '@/lib/cache/billboard';
 import { billboardRepository } from '@/repository/billboard';
@@ -10,7 +10,7 @@ import { FC, Suspense } from 'react';
 type BillboardNewPageProps = { params: Promise<{ id: string }> };
 
 export default async function BillboardNewPage({ params }: BillboardNewPageProps) {
-  // TODO validar id billboard
+  // FIXME fazer edit de category, refatorar(tanto actions e etc)
   // const { id } = await params;
   return (
     <Container>

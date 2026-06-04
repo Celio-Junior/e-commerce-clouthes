@@ -4,8 +4,10 @@ import { CategoryActionType } from '@/interfaces/Category.interface';
 import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
 
 import { CategoryCreateFormSchema, CategoryCreateFormType } from '@/lib/validations/category';
+import { categoryRepository } from '@/repository/category';
 
 import { formatZodMessage } from '@/utils/formats-functions';
+import { revalidateTag } from 'next/cache';
 
 export default async function categoryCreateAction(
   data: CategoryCreateFormType,
@@ -20,8 +22,9 @@ export default async function categoryCreateAction(
   }
 
   try {
-    // const imgId = await billboardRepository.create();
-    // revalidateTag('billboards', { expire: EXPIRE_TAG_BILLBOARDS });
+    const category = await categoryRepository.create(validCategoryForm.data);
+    // VER O REPOSITORY DO CATEGORIES FAZER OS METODOS
+    revalidateTag('categories', { expire: EXPIRE_TAG_BILLBOARDS });
     return {
       success: true,
       data: '',

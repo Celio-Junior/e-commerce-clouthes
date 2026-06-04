@@ -6,10 +6,16 @@ export type CategoryModelType = {
   updatedAt: Date;
 };
 
-export type CategoryPublicType = Pick<CategoryModelType, 'name' | 'billboard_id'>;
+export type CategoryCreateType = Pick<CategoryModelType, 'name' | 'billboard_id'>;
 
+export type CategoryPublicType = {
+  id: CategoryModelType['id'];
+  name: CategoryModelType['name'];
+  billboard: string;
+  createdAt: CategoryModelType['createdAt'];
+};
 export interface CategoryRepositoryInterface {
-  create(data: CategoryPublicType): Promise<void>;
+  create(data: CategoryCreateType): Promise<CategoryModelType>;
   findAllPublic(): Promise<CategoryPublicType[]>;
 }
 

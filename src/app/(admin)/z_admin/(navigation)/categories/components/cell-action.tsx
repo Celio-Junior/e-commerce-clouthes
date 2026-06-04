@@ -10,14 +10,14 @@ import {
   // DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { BillBoardColumn } from './columns';
+import { CategoryColumn } from './columns';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import billboardDeleteAction from '@/actions/billboard/delete.action';
 import { ModelDialog } from '@/components/AlertDialog';
 
 type CellActionProps = {
-  data: BillBoardColumn;
+  data: CategoryColumn;
 };
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -34,7 +34,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuItem onClick={() => navigator.clipboard.writeText(data.id)}>Copy ID</DropdownMenuItem>
         {/* <DropdownMenuSeparator /> */}
-        <DropdownMenuItem onClick={() => router.push(`/z_admin/billboards/edit/${data.id}`)}>
+        <DropdownMenuItem onClick={() => router.push(`/z_admin/categories/edit/${data.id}`)}>
           <EditIcon />
           Edit
         </DropdownMenuItem>

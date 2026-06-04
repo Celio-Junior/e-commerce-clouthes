@@ -1,11 +1,12 @@
 import { Sequelize } from 'sequelize-typescript';
 import { configDb } from '../config/db';
 import User from '@/models/User';
-import Billboard from '@/models/Billboards';
+import Category from '@/models/Category';
+import Billboard from '@/models/Billboard';
 import ImageBillboard from '@/models/ImageBillboard';
 
 export const sequelize = new Sequelize(configDb);
-sequelize.addModels([User, Billboard, ImageBillboard]);
+sequelize.addModels([User, Billboard, Category, ImageBillboard]);
 
 export async function initDB() {
   await sequelize.sync();

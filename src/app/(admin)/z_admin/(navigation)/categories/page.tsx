@@ -1,17 +1,22 @@
 import Container from '@/components/Container';
 import CategoryClient from './client';
 
-import { BillBoardColumn } from './components/columns';
-import { billCacheAllBillboards } from '@/lib/cache/billboard';
+import { CategoryColumn } from './components/columns';
+
 import { Suspense } from 'react';
+import { cacheCategoryAll } from '@/lib/cache/category';
 
 export default async function BillboardsPage() {
-  const billboards = await billCacheAllBillboards();
-  const formattedBillboards: BillBoardColumn[] = billboards.map(({ id, label, createdAt }) => ({
-    id,
-    label,
-    createdAt,
-  }));
+  const billboards = await cacheCategoryAll();
+  const formattedBillboards: CategoryColumn[] = billboards.map(
+    ({ id, name: label, billboard, createdAt }) => ({
+      id,
+      label,
+      billboard,
+      createdAt,
+    }),
+  );
+
   return (
     <Container>
       <Suspense fallback={null}>

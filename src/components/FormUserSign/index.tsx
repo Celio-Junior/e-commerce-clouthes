@@ -56,12 +56,7 @@ export default function FormUserSing() {
   }
 
   return (
-    <form
-      onSubmit={() => console.log(isViewFormLogin ? 'create' : 'login')}
-      key={isViewFormLogin ? 'create' : 'login'}
-      className="flex flex-col"
-      action={action}
-    >
+    <form key={isViewFormLogin ? 'create' : 'login'} className="flex flex-col" action={action}>
       {isViewFormLogin && (
         <Input defaultValue={state.formState.name} name="name" placeholder="ex: Fulano souza">
           Name

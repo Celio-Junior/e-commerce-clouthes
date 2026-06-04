@@ -7,6 +7,7 @@ export type BillboardModelType = {
   updatedAt: Date;
 };
 export type BillboardPublicType = Omit<BillboardModelType, 'createdAt' | 'updatedAt' | 'id'>;
+
 export type ImgModelType = {
   id: string;
   url: string;

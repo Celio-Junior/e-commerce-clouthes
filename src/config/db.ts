@@ -6,5 +6,6 @@ export const configDb: SequelizeOptions = {
   dialect: envVar.get('DB_DIALECT').default('sqlite').asString() as Dialect,
   storage: resolve(process.cwd(), 'src', 'database', envVar.get('DB_PATH').default('db.sqlite').asString()),
   logging: false,
+  // models: [resolve(process.cwd(), 'src', 'models')],
   // logging: false,
 };
