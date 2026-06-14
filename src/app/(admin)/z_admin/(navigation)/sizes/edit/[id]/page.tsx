@@ -1,13 +1,13 @@
 import Container from '@/components/Container';
 
 import SubTitle from '@/components/Subtitle';
-import { cacheBillboardsAll } from '@/lib/cache/billboard';
 
 import NotFoundPage from '@/app/(admin)/not-found';
 
 import { FC, Suspense } from 'react';
-import FormCategory from '@/components/admin/Form/FormCategory';
-import { categoryRepository } from '@/repository/category';
+
+import { sizeRepository } from '@/repository/size';
+import FormSize from '@/components/admin/Form/FormSize';
 
 type BillboardNewPageProps = { params: Promise<{ id: string }> };
 
@@ -29,18 +29,14 @@ export default async function CategoryNewPage({ params }: BillboardNewPageProps)
 
 const BillboardDetailPage: FC<BillboardNewPageProps> = async ({ params }) => {
   const { id } = await params;
-  const billboards = await cacheBillboardsAll();
-  const isCategory = await categoryRepository.findById(id).catch(() => null);
-  if (!isCategory) return NotFoundPage();
+  const isSize = await sizeRepository.findById(id);
+
+  if (!isSize) return NotFoundPage();
   return (
     <>
-      <SubTitle title="Edit billboard" description="Update data billboard" />
+      <SubTitle title="Edit Size" description="Update data Size" />
 
-      <FormCategory
-        category={{ id: isCategory.id, name: isCategory.name, billboard: isCategory.billboard_id }}
-        method="update"
-        billboards={billboards}
-      />
+      <FormSize size={isSize} method="update" />
     </>
   );
 };

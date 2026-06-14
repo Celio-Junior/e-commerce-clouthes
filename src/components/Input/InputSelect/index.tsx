@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/select';
 import { extractClassesStyles } from '@/utils/extract-classes-styles';
 import { cn } from '@/utils/formats-functions';
-import { ComponentPropsWithRef, ReactNode, RefObject } from 'react';
+import { ComponentPropsWithRef, ReactNode, RefObject, useEffect } from 'react';
 
 type InputSelectProps<D> = {
   children: ReactNode;
@@ -18,6 +18,7 @@ type InputSelectProps<D> = {
   disabled?: boolean;
   className?: ComponentPropsWithRef<'input'>['className'];
   placeholder?: string;
+  defaultValue?: string;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,9 +29,17 @@ export function InputSelect<D extends (string | (object & Record<string, any>))[
   placeholder,
   disabled,
   className = '',
+  defaultValue,
 }: InputSelectProps<D>) {
+  // 1. Inicializa o ref com o defaultValue se ele existir
+
+  useEffect(() => {
+    if (defaultValue && inputRef && !inputRef.current) {
+      inputRef.current = defaultValue;
+    }
+  }, [defaultValue, inputRef]);
+
   const handleSelectChange = (value: string) => {
-    console.log(value);
     inputRef.current = value;
   };
 
@@ -39,7 +48,12 @@ export function InputSelect<D extends (string | (object & Record<string, any>))[
       <label className="capitalize text-lg text-gray-800 font-semibold" htmlFor={label?.toString()}>
         {label}
       </label>
-      <Select disabled={disabled} onValueChange={handleSelectChange}>
+      <Select
+        key={defaultValue}
+        defaultValue={defaultValue ?? ''}
+        disabled={disabled}
+        onValueChange={handleSelectChange}
+      >
         <SelectTrigger
           className={cn(
             'border-2 rounded-lg py-1 px-2 bg-gray-100/10',

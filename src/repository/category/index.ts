@@ -46,6 +46,39 @@ class CategoryRepository implements CategoryRepositoryInterface {
       createdAt: category.createdAt,
     }));
   }
+  async findById(id: string): Promise<CategoryModelType> {
+    if (!id) throw new Error('id is empty');
+
+    const category = await Category.findByPk(id, { raw: true, nest: true });
+    if (!category) throw new Error('fail at search billboard');
+
+    return category;
+  }
+
+  async update(id: string, { name, billboard_id }: CategoryCreateType): Promise<string> {
+    const isCategory = await Category.findByPk(id, {
+      include: {
+        association: 'billboard',
+        foreignKey: 'billboard_id',
+      },
+    });
+
+    if (!isCategory) throw new Error('Billboard already exists');
+
+    if (isCategory.name === name && isCategory.billboard_id === billboard_id)
+      throw new Error('Category not changed, already exists');
+    await isCategory.update({ name, billboard_id });
+    return isCategory.id;
+  }
+
+  async remove(id: string): Promise<void> {
+    if (!id) throw new Error('id is empty');
+
+    const category = await Category.findByPk(id);
+    if (!category) throw new Error('fail at search category');
+
+    await category.destroy();
+  }
 }
 
 export const categoryRepository = new CategoryRepository();

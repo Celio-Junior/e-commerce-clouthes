@@ -3,11 +3,11 @@ import Container from '@/components/Container';
 
 import SubTitle from '@/components/Subtitle';
 
-import { billCacheAllImages } from '@/lib/cache/billboard';
+import { cacheBillImgsAll } from '@/lib/cache/billboard';
 import { Suspense } from 'react';
 
 export default async function BillboardNewPage() {
-  const billboardsImages = await billCacheAllImages();
+  const billboardsImages = await cacheBillImgsAll();
   return (
     <Container>
       <SubTitle title="Create billboard" description="Add new billboard" />

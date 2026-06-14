@@ -9,7 +9,7 @@ type BillboardDeleteActionType = {
   id: string;
 };
 
-export default async function categoryDeleteAction(data: BillboardDeleteActionType) {
+export default async function sizeDeleteAction(data: BillboardDeleteActionType) {
   const { id } = data;
 
   try {

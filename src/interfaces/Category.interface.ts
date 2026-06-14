@@ -16,7 +16,10 @@ export type CategoryPublicType = {
 };
 export interface CategoryRepositoryInterface {
   create(data: CategoryCreateType): Promise<CategoryModelType>;
+  update(id: string, data: CategoryCreateType): Promise<string>;
   findAllPublic(): Promise<CategoryPublicType[]>;
+  findById(id: string): Promise<CategoryModelType>;
+  remove(id: string): Promise<void>;
 }
 
 export type CategoryActionType =

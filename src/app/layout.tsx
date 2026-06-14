@@ -22,8 +22,8 @@ export default function Layout({
     <html lang="pt-BR" className={cn('font-sans', geist.variable)}>
       <body className="">
         <ToastContainer
-          position="top-center"
-          autoClose={3000}
+          position="top-right"
+          autoClose={1000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick={false}

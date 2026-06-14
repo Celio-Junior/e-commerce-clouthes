@@ -5,4 +5,9 @@ export const CategoryCreateFormSchema = z.object({
   billboard_id: z.string().trim().nonempty('billboard id is required'),
 });
 
+export const CategoryUpdateFormSchema = CategoryCreateFormSchema.extend({
+  id: z.string().trim().nonempty('id is required'),
+});
+
 export type CategoryCreateFormType = z.infer<typeof CategoryCreateFormSchema>;
+export type CategoryUpdateFormType = z.infer<typeof CategoryUpdateFormSchema>;

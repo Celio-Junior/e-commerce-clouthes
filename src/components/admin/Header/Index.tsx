@@ -7,7 +7,7 @@ export default function HeaderAdmin() {
       <h1 className="text-3xl" title="titulo/logo">
         NEXA admin
       </h1>
-      <NavigationAdmin />
+      <NavigationAdmin linkNavigation={['overview', 'billboards', 'categories', 'sizes', 'settings']} />
       <div>User😎</div>
     </div>
   );

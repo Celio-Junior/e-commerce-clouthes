@@ -10,15 +10,17 @@ import {
   // DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { CategoryColumn } from './columns';
+
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
 import { ModelDialog } from '@/components/AlertDialog';
-import categoryDeleteAction from '@/actions/category/delete.action';
+
+import sizeDeleteAction from '@/actions/size/delete.action';
+import { SizeColumn } from './columns';
 
 type CellActionProps = {
-  data: CategoryColumn;
+  data: SizeColumn;
 };
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -35,7 +37,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuItem onClick={() => navigator.clipboard.writeText(data.id)}>Copy ID</DropdownMenuItem>
         {/* <DropdownMenuSeparator /> */}
-        <DropdownMenuItem onClick={() => router.push(`/z_admin/categories/edit/${data.id}`)}>
+        <DropdownMenuItem onClick={() => router.push(`/z_admin/sizes/edit/${data.id}`)}>
           <EditIcon />
           Edit
         </DropdownMenuItem>
@@ -44,7 +46,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             title="Delete billboard"
             description="Are you sure you want to delete this billboard?"
             onConfirm={() => {
-              categoryDeleteAction({ id: data.id });
+              sizeDeleteAction({ id: data.id });
               router.refresh();
             }}
           >

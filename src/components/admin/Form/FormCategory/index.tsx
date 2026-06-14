@@ -9,24 +9,19 @@ import { BillboardModelType } from '@/interfaces/Billboard.interface';
 import categoryCreateAction from '@/actions/category/create.action';
 import categoryUpdateAction from '@/actions/category/update.action';
 import { toast } from 'react-toastify';
-
-//acho que vou colocar id
-
-export type ImagesBillboardType = {
-  id: string;
-  url: string;
-  isActive: boolean;
-};
+import { CategoryPublicType } from '@/interfaces/Category.interface';
 
 type FormCategoryProps = {
   method: 'create' | 'update';
   billboards: BillboardModelType[];
+  category?: Omit<CategoryPublicType, 'createdAt'>;
 };
 
-export default function FormCategory({ method, billboards }: FormCategoryProps) {
+export default function FormCategory({ method, billboards, category }: FormCategoryProps) {
   const nameCategoryInput = useRef<HTMLInputElement>(null);
-  const billboardIdInput = useRef<string>('');
-  console.log(billboards);
+
+  const billboardIdInput = useRef<string>(category?.billboard ?? '');
+
   const [isTransitionCategory, startTransitionCategory] = useTransition();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -42,7 +37,7 @@ export default function FormCategory({ method, billboards }: FormCategoryProps) 
     startTransitionCategory(async () => {
       const categoryResponse = await (method === 'create'
         ? categoryCreateAction(data)
-        : categoryUpdateAction(data));
+        : categoryUpdateAction({ ...data, id: category?.id ?? '' }));
 
       if (!categoryResponse.success && categoryResponse.errors.length > 0)
         return categoryResponse.errors.forEach((err) => toast.error(err, { toastId: err }));
@@ -68,7 +63,7 @@ export default function FormCategory({ method, billboards }: FormCategoryProps) 
           name="nameCategory"
           className="border border-gray-200 outline-0 focus:outline w-100"
           placeholder="Category name"
-          defaultValue={method === 'update' ? '' : ''}
+          defaultValue={method === 'update' ? (category?.name ?? '') : ''}
         >
           Label
         </Input>
@@ -79,6 +74,7 @@ export default function FormCategory({ method, billboards }: FormCategoryProps) 
           placeholder="select billboard"
           data={billboards}
           disabled={isTransitionCategory}
+          defaultValue={category?.billboard}
         >
           Billboard
         </InputSelect>

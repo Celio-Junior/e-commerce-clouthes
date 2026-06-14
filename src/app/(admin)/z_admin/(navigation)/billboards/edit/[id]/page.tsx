@@ -1,7 +1,7 @@
 import Container from '@/components/Container';
 
 import SubTitle from '@/components/Subtitle';
-import { billCacheAllImages } from '@/lib/cache/billboard';
+import { cacheBillImgsAll } from '@/lib/cache/billboard';
 import { billboardRepository } from '@/repository/billboard';
 import NotFoundPage from '@/app/(admin)/not-found';
 
@@ -28,7 +28,7 @@ export default async function BillboardNewPage({ params }: BillboardNewPageProps
 
 const BillboardDetailPage: FC<BillboardNewPageProps> = async ({ params }) => {
   const { id } = await params;
-  const billboardsImages = await billCacheAllImages();
+  const billboardsImages = await cacheBillImgsAll();
   const isBillboard = await billboardRepository.findById(id).catch(() => null);
   if (!isBillboard) return NotFoundPage();
   return (

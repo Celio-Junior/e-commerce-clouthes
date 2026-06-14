@@ -6,7 +6,7 @@ import { CategoryColumn } from './components/columns';
 import { Suspense } from 'react';
 import { cacheCategoryAll } from '@/lib/cache/category';
 
-export default async function BillboardsPage() {
+export default async function CategoryPage() {
   const billboards = await cacheCategoryAll();
   const formattedBillboards: CategoryColumn[] = billboards.map(
     ({ id, name: label, billboard, createdAt }) => ({

@@ -4,9 +4,10 @@ import User from '@/models/User';
 import Category from '@/models/Category';
 import Billboard from '@/models/Billboard';
 import ImageBillboard from '@/models/ImageBillboard';
+import Size from '@/models/Size.model';
 
 export const sequelize = new Sequelize(configDb);
-sequelize.addModels([User, Billboard, Category, ImageBillboard]);
+sequelize.addModels([User, Billboard, Category, ImageBillboard, Size]);
 
 export async function initDB() {
   await sequelize.sync();

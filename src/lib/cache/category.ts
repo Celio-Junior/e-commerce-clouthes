@@ -4,6 +4,6 @@ import { cache } from 'react';
 
 export const cacheCategoryAll = cache(async () => {
   'use cache';
-  cacheTag("category's");
+  cacheTag('categorys');
   return await categoryRepository.findAllPublic();
 });
