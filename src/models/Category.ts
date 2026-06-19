@@ -5,12 +5,14 @@ import {
   CreatedAt,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
   UpdatedAt,
 } from 'sequelize-typescript';
 import Billboard from './Billboard';
+import Product from './Product';
 
 @Table({ tableName: 'categories', modelName: 'Category', timestamps: true, underscored: true })
 export default class Category extends Model<CategoryModelType, CategoryCreateType> {
@@ -31,6 +33,8 @@ export default class Category extends Model<CategoryModelType, CategoryCreateTyp
   @CreatedAt
   declare createdAt: Date;
 
+  @HasMany(() => Product)
+  declare products: Product[];
   @UpdatedAt
   declare updatedAt: Date;
 }

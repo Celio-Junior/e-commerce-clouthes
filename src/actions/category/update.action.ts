@@ -21,10 +21,10 @@ export default async function categoryUpdateAction(
     };
   }
   try {
-    const billboardData = validCategoryForm.data;
-    const categoryId = await categoryRepository.update(billboardData.id, billboardData);
-    console.log('teste category', data);
-    revalidateTag('billboards', { expire: EXPIRE_TAG_BILLBOARDS });
+    const categoryData = validCategoryForm.data;
+    const categoryId = await categoryRepository.update(categoryData.id, categoryData);
+
+    revalidateTag('colors', { expire: EXPIRE_TAG_BILLBOARDS });
     return {
       success: true,
       data: categoryId,

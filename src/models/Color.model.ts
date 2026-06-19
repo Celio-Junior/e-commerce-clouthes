@@ -10,8 +10,8 @@ import {
 } from 'sequelize-typescript';
 import Product from './Product';
 
-@Table({ tableName: 'sizes', modelName: 'Size', timestamps: true, underscored: true })
-export default class Size extends Model {
+@Table({ tableName: 'colors', modelName: 'Color', timestamps: true, underscored: true })
+export default class Color extends Model {
   @PrimaryKey
   @Column({ allowNull: false, type: DataType.UUIDV4, defaultValue: DataType.UUIDV4 })
   declare id: string;
@@ -19,7 +19,6 @@ export default class Size extends Model {
   @PrimaryKey
   @Column({ allowNull: false, type: DataType.STRING(150), unique: true })
   declare name: string;
-
   @Column({ allowNull: false, type: DataType.STRING(60) })
   declare value: string;
 

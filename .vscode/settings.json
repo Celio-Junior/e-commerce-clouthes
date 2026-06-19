@@ -1,5 +1,14 @@
 {
   "cSpell.words": ["categorys", "cloudinary", "clouth", "jose", "NEXA", "UUIDV"],
   "remote.autoForwardPortsFallback": 0,
-  "js/ts.tsdk.path": "node_modules/typescript/lib"
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "yaml.schemas": {
+    "file:///c%3A/Users/Celio/.vscode/extensions/continue.continue-1.2.22-win32-x64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ],
+    "file:///c%3A/Users/Celio/.vscode/extensions/continue.continue-1.2.24-win32-x64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ],
+    "file:///c:/Users/Celio/.vscode/extensions/continue.continue-1.2.22-win32-x64/config-yaml-schema.json": "vscode-local:/c%3A/Users/Celio/.continue/config.yaml"
+  }
 }

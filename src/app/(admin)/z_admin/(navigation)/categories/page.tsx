@@ -7,8 +7,8 @@ import { Suspense } from 'react';
 import { cacheCategoryAll } from '@/lib/cache/category';
 
 export default async function CategoryPage() {
-  const billboards = await cacheCategoryAll();
-  const formattedBillboards: CategoryColumn[] = billboards.map(
+  const categories = await cacheCategoryAll();
+  const formattedCategories: CategoryColumn[] = categories.map(
     ({ id, name: label, billboard, createdAt }) => ({
       id,
       label,
@@ -20,7 +20,7 @@ export default async function CategoryPage() {
   return (
     <Container>
       <Suspense fallback={null}>
-        <CategoryClient data={formattedBillboards} />
+        <CategoryClient data={formattedCategories} />
       </Suspense>
     </Container>
   );

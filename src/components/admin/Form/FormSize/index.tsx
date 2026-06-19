@@ -46,6 +46,7 @@ export default function FormSize({ method, size }: FormBillboardProps) {
 
         if (method === 'create') router.push('/z_admin/sizes');
       }
+      e.currentTarget.reset(); // Limpa o formulário após enviar
     });
   }
   return (
@@ -56,7 +57,7 @@ export default function FormSize({ method, size }: FormBillboardProps) {
           disabled={isTransitionSize}
           name="name"
           className="border border-gray-200 outline-0 focus:outline-1 w-100"
-          placeholder="billboard label"
+          placeholder="name size"
           defaultValue={method === 'update' && size ? size.name : ''}
         >
           Name
@@ -66,7 +67,7 @@ export default function FormSize({ method, size }: FormBillboardProps) {
           disabled={isTransitionSize}
           name="value"
           className="border border-gray-200 outline-0 focus:outline-1 w-100"
-          placeholder="billboard label"
+          placeholder="value size"
           defaultValue={method === 'update' && size ? size.value : ''}
         >
           Value

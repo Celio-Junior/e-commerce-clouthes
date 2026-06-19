@@ -16,8 +16,8 @@ import { usePathname, useRouter } from 'next/navigation';
 
 import { ModelDialog } from '@/components/AlertDialog';
 
-import sizeDeleteAction from '@/actions/size/delete.action';
 import { SizeColumn } from './columns';
+import colorDeleteAction from '@/actions/color/delete.action';
 
 type CellActionProps = {
   data: SizeColumn;
@@ -25,7 +25,6 @@ type CellActionProps = {
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const pathname = usePathname();
-
   const router = useRouter();
   return (
     <DropdownMenu>
@@ -48,7 +47,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             title="Delete billboard"
             description="Are you sure you want to delete this billboard?"
             onConfirm={() => {
-              sizeDeleteAction({ id: data.id });
+              colorDeleteAction({ id: data.id });
               router.refresh();
             }}
           >

@@ -2,19 +2,19 @@
 
 import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
 
-import { sizeRepository } from '@/repository/size';
+import { colorRepository } from '@/repository/color';
 import { revalidateTag } from 'next/cache';
 
 type BillboardDeleteActionType = {
   id: string;
 };
 
-export default async function sizeDeleteAction(data: BillboardDeleteActionType) {
+export default async function colorDeleteAction(data: BillboardDeleteActionType) {
   const { id } = data;
 
   try {
-    await sizeRepository.remove(id);
-    revalidateTag('sizes', { expire: EXPIRE_TAG_BILLBOARDS });
+    await colorRepository.remove(id);
+    revalidateTag('colors', { expire: EXPIRE_TAG_BILLBOARDS });
   } catch (e) {
     if (e instanceof Error) {
       return {

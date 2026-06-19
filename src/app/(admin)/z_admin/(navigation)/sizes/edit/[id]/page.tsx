@@ -9,25 +9,25 @@ import { FC, Suspense } from 'react';
 import { sizeRepository } from '@/repository/size';
 import FormSize from '@/components/admin/Form/FormSize';
 
-type BillboardNewPageProps = { params: Promise<{ id: string }> };
+type SizeNewPageProps = { params: Promise<{ id: string }> };
 
-export default async function CategoryNewPage({ params }: BillboardNewPageProps) {
+export default async function SizeNewPage({ params }: SizeNewPageProps) {
   // FIXME fazer edit de category, refatorar(tanto actions e etc)
   // const { id } = await params;
   return (
     <Container>
       <Suspense fallback={null}>
-        <BillboardDetailPage params={params} />
+        <SizeDetailPage params={params} />
       </Suspense>
     </Container>
   );
 }
 
-// type BillboardDetailPageProps = {
+// type SizeDetailPageProps = {
 //   id: string;
 // };
 
-const BillboardDetailPage: FC<BillboardNewPageProps> = async ({ params }) => {
+const SizeDetailPage: FC<SizeNewPageProps> = async ({ params }) => {
   const { id } = await params;
   const isSize = await sizeRepository.findById(id);
 
