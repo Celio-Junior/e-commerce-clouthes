@@ -10,6 +10,7 @@ import { useRouter } from 'next/navigation';
 import ImageUpload from '@/components/ImageUpload';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import { billboardImageDeleteAction } from '@/actions/billboard/delete.action';
 
 //acho que vou colocar id
 
@@ -74,7 +75,12 @@ export default function FormBillboard({ billboardsImgs, method, billboard }: For
   }
   return (
     <form onSubmit={handleSubmit} className="shadow-sm shadow-gray-100 px-1 py-3 rounded-2xl" action="">
-      <ImageUpload showImagesUrl={showImagesUrl} setShowImagesUrl={setShowImagesUrl} />
+      <ImageUpload
+        handleDelete={billboardImageDeleteAction}
+        labelText={'Background Image'}
+        showImagesUrl={showImagesUrl}
+        setShowImagesUrl={setShowImagesUrl}
+      />
 
       <Input
         ref={labelText}

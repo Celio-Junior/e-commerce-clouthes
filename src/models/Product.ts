@@ -5,6 +5,7 @@ import {
   CreatedAt,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   PrimaryKey,
   Table,
@@ -13,6 +14,7 @@ import {
 import Category from './Category';
 import Size from './Size.model';
 import Color from './Color.model';
+import ImageProduct from './ImageProduct.model';
 
 @Table({
   underscored: true,
@@ -56,4 +58,7 @@ export default class Product extends Model<ProductModelType, ProductCreateType> 
 
   @BelongsTo(() => Color)
   declare color: Color;
+
+  @HasMany(() => ImageProduct)
+  declare imagesProducts: ImageProduct[];
 }

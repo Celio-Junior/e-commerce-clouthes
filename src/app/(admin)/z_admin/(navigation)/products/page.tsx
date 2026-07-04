@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 
 import { cacheProductAll } from '@/lib/cache/product.cache';
 
-export default async function ColorPage() {
+export default async function ProductPage() {
   const products = await cacheProductAll();
 
   return (

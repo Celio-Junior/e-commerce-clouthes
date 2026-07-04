@@ -26,7 +26,7 @@ class BillboardRepository implements BillboardRepositoryInterface {
       nest: true,
     });
     /*
-    Quando você faz uma consulta, pode passar a opção raw: true. Isso faz com que o Sequelize não crie uma "instância" (com métodos como .save(), .update()), mas retorne apenas os dados.raw: true: Retorna um objeto "achatado" (ex: categoria.nome vira categoria.nome como chave única).nest: true: Usado junto com raw, organiza as associações em objetos aninhados.
+    Quando você faz uma consulta, pode passar a opção raw: true. Isso faz com que o Sequelize não crie uma "instância" (com métodos como .save(), .update()), mas retorne apenas os dados.raw: true: Retorna um objeto "achatado" (ex: categoria.nome vira categoria.nome como chave única).nest: true: Usado junto com raw, organiza as associações em objetos aninhados( pois sem ele osbjetos fica no mesmo nivel, n tem subobjetos, ele faz isso, essa "hierarquia").
     isBillboard?.reload() => methodo que carrega que você recarrega e outras coias
     */
     // console.log('isbillboard', isBillboard?.reload());
@@ -98,6 +98,15 @@ class BillboardRepository implements BillboardRepositoryInterface {
     if (!billboard) throw new Error('fail at search billboard');
 
     await billboard.destroy();
+  }
+
+  async removeImages(id: string): Promise<void> {
+    if (!id) throw new Error('id image is empty');
+    const image = await ImageBillboard.findByPk(id);
+
+    if (!image) throw new Error('fail at search image');
+
+    await image.destroy();
   }
 }
 

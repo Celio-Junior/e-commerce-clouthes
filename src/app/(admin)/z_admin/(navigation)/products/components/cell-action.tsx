@@ -17,7 +17,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { ModelDialog } from '@/components/AlertDialog';
 
 import { SizeColumn } from './columns';
-import colorDeleteAction from '@/actions/color/delete.action';
+
+import productDeleteAction from '@/actions/product/delete.action';
 
 type CellActionProps = {
   data: SizeColumn;
@@ -47,7 +48,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             title="Delete billboard"
             description="Are you sure you want to delete this billboard?"
             onConfirm={() => {
-              colorDeleteAction({ id: data.id });
+              productDeleteAction({ id: data.id });
               router.refresh();
             }}
           >

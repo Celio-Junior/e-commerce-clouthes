@@ -12,7 +12,6 @@ import FormSize from '@/components/admin/Form/FormSize';
 type SizeNewPageProps = { params: Promise<{ id: string }> };
 
 export default async function SizeNewPage({ params }: SizeNewPageProps) {
-  // FIXME fazer edit de category, refatorar(tanto actions e etc)
   // const { id } = await params;
   return (
     <Container>

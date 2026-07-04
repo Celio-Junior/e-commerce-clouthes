@@ -6,12 +6,15 @@ import NotFoundPage from '@/app/(admin)/not-found';
 
 import { FC, Suspense } from 'react';
 
-import { colorRepository } from '@/repository/color';
-import FormColor from '@/components/admin/Form/FormColor';
+import FormProduct from '@/components/admin/Form/FormProduct';
+import { cacheCategoryAll } from '@/lib/cache/category';
+import { cacheSizeAll } from '@/lib/cache/size.cache';
+import { cacheColorAll } from '@/lib/cache/color.cache';
+import { productRepository } from '@/repository/product';
 
 type ColorNewPageProps = { params: Promise<{ id: string }> };
 
-export default async function ColorNewPage({ params }: ColorNewPageProps) {
+export default async function ProductEditPage({ params }: ColorNewPageProps) {
   return (
     <Container>
       <Suspense fallback={null}>
@@ -23,14 +26,21 @@ export default async function ColorNewPage({ params }: ColorNewPageProps) {
 
 const ColorDetailPage: FC<ColorNewPageProps> = async ({ params }) => {
   const { id } = await params;
-  const isColor = await colorRepository.findById(id);
+  const sections = await Promise.all([cacheCategoryAll(), cacheSizeAll(), cacheColorAll()]);
+  const isProduct = await productRepository.findById(id);
 
-  if (!isColor) return NotFoundPage();
+  if (!isProduct) return NotFoundPage();
   return (
     <>
-      <SubTitle title="Edit Color" description="Update data Color" />
+      <SubTitle title="Edit Product" description="Update datas product" />
 
-      <FormColor color={isColor} method="update" />
+      <FormProduct
+        method="update"
+        product={isProduct}
+        categories={sections[0]}
+        sizes={sections[1]}
+        colors={sections[2]}
+      />
     </>
   );
 };

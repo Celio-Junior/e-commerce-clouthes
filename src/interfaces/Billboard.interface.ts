@@ -25,6 +25,7 @@ export type BillboardRepositoryInterface = {
   // findAll(): Promise<BillboardModelType[]>;
   findAllPublic(): Promise<BillboardModelType[]>;
   findAllImages(): Promise<ImgPublicType[]>;
+  removeImages(id: string): Promise<void>;
   findOne(billboard: Partial<BillboardModelType>): Promise<BillboardPublicType>;
   findById(id: string): Promise<BillboardModelType>;
   update(id: string, data: BillCreateAtributesType): Promise<string>;

@@ -1,19 +1,20 @@
 'use server';
 
 import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
-import { billboardRepository } from '@/repository/billboard';
+
+import { productRepository } from '@/repository/product';
 import { revalidateTag } from 'next/cache';
 
 type BillboardDeleteActionType = {
   id: string;
 };
 
-export default async function billboardDeleteAction(data: BillboardDeleteActionType) {
+export default async function productDeleteAction(data: BillboardDeleteActionType) {
   const { id } = data;
 
   try {
-    await billboardRepository.remove(id);
-    revalidateTag('billboards', { expire: EXPIRE_TAG_BILLBOARDS });
+    await productRepository.remove(id);
+    revalidateTag('products', { expire: EXPIRE_TAG_BILLBOARDS });
   } catch (e) {
     if (e instanceof Error) {
       return {
@@ -28,10 +29,9 @@ export default async function billboardDeleteAction(data: BillboardDeleteActionT
   }
 }
 
-export async function billboardImageDeleteAction(id: string) {
+export async function productImageDeleteAction(id: string) {
   try {
-    await billboardRepository.removeImages(id);
-    revalidateTag('billboardImages', { expire: EXPIRE_TAG_BILLBOARDS });
+    await productRepository.removeImages(id);
   } catch (e) {
     // if (e instanceof Error) {
     //   return {

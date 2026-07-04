@@ -10,6 +10,7 @@ import categoryCreateAction from '@/actions/category/create.action';
 import categoryUpdateAction from '@/actions/category/update.action';
 import { toast } from 'react-toastify';
 import { CategoryPublicType } from '@/interfaces/Category.interface';
+import { CategoryPublicDto } from '@/dto/Category.dto';
 
 type FormCategoryProps = {
   method: 'create' | 'update';
@@ -26,13 +27,12 @@ export default function FormCategory({ method, billboards, category }: FormCateg
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    console.log(Object.fromEntries(new FormData(e.currentTarget)));
     const form = e.target;
     if (!(form instanceof HTMLFormElement)) return;
 
-    const data = {
-      name: nameCategoryInput.current?.value ?? '',
-      billboard_id: billboardIdInput.current,
-    };
+    // new FormData(form).keys().forEach((key) => console.log(key));
+    const data = CategoryPublicDto.parse(Object.fromEntries(new FormData(form)));
 
     startTransitionCategory(async () => {
       const categoryResponse = await (method === 'create'
@@ -60,7 +60,7 @@ export default function FormCategory({ method, billboards, category }: FormCateg
         <Input
           ref={nameCategoryInput}
           disabled={isTransitionCategory}
-          name="nameCategory"
+          name="name"
           className="border border-gray-200 outline-0 focus:outline w-100"
           placeholder="Category name"
           defaultValue={method === 'update' ? (category?.name ?? '') : ''}
@@ -69,8 +69,10 @@ export default function FormCategory({ method, billboards, category }: FormCateg
         </Input>
 
         <InputSelect
+          name="billboard_id"
           inputRef={billboardIdInput}
           className="w-100"
+          keySelect="label"
           placeholder="select billboard"
           data={billboards}
           disabled={isTransitionCategory}

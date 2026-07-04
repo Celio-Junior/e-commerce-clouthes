@@ -18,6 +18,7 @@ export const columns: ColumnDef<SizeColumn>[] = [
   {
     accessorKey: 'price',
     header: 'Price',
+    cell: ({ row }) => `$${row.original.price.toFixed(2)}`,
   },
   {
     accessorKey: 'category',

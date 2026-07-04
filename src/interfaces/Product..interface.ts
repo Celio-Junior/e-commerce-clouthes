@@ -1,3 +1,6 @@
+import { ProductCreateFormType } from '@/lib/validations/product';
+import { ColorActionType } from './Color.interface';
+
 export type ProductModelType = {
   id: string;
   name: string;
@@ -9,7 +12,16 @@ export type ProductModelType = {
   updatedAt: Date;
 };
 
-export type ProductCreateType = Omit<ProductModelType, 'id' | 'createdAt' | 'updatedAt'>;
+export type ImageProductModelType = {
+  id: string;
+  url: string;
+  product_id: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+export type ImageProductPublicType = Omit<ImageProductModelType, 'createdAt' | 'updatedAt'>;
+
+export type ProductCreateType = ProductCreateFormType;
 export type ProductPublicType = Pick<ProductModelType, 'id' | 'name' | 'price' | 'createdAt'> & {
   color: string;
   category: string;
@@ -21,4 +33,7 @@ export interface ProductRepositoryInterface {
   findAllPublic(): Promise<ProductPublicType[]>;
   findById(id: string): Promise<ProductPublicType>;
   remove(id: string): Promise<void>;
+  removeImages(id: string): Promise<void>;
 }
+
+export type ProductActionType = ColorActionType;

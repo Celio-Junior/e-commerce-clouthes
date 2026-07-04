@@ -3,12 +3,12 @@
 import { SizeActionType } from '@/interfaces/Size.interface';
 import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
 
-import { SizeUpdateFormSchema, sizeUpdateFormType } from '@/lib/validations/size';
+import { SizeUpdateFormSchema, SizeUpdateFormType } from '@/lib/validations/size';
 import { sizeRepository } from '@/repository/size';
 import { formatZodMessage } from '@/utils/formats-functions';
 import { revalidateTag } from 'next/cache';
 
-export default async function sizeUpdateAction(data: sizeUpdateFormType): Promise<SizeActionType> {
+export default async function sizeUpdateAction(data: SizeUpdateFormType): Promise<SizeActionType> {
   const validSizeForm = SizeUpdateFormSchema.safeParse(data);
 
   if (!validSizeForm.success) {

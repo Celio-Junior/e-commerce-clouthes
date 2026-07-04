@@ -10,4 +10,4 @@ export const SizeUpdateFormSchema = SizeCreateFormSchema.extend({
 });
 
 export type SizeCreateFormType = z.infer<typeof SizeCreateFormSchema>;
-export type sizeUpdateFormType = z.infer<typeof SizeUpdateFormSchema>;
+export type SizeUpdateFormType = z.infer<typeof SizeUpdateFormSchema>;

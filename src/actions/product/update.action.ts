@@ -1,16 +1,17 @@
 'use server';
 
-import { SizeActionType } from '@/interfaces/Size.interface';
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { ProductActionType } from '@/interfaces/Product..interface';
 
-import { SizeUpdateFormSchema, SizeUpdateFormType } from '@/lib/validations/size';
-import { colorRepository } from '@/repository/color';
+import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { ProductUpdateFormSchema, ProductUpdateFormType } from '@/lib/validations/product';
+
+import { productRepository } from '@/repository/product';
 
 import { formatZodMessage } from '@/utils/formats-functions';
 import { revalidateTag } from 'next/cache';
 
-export default async function colorUpdateAction(data: SizeUpdateFormType): Promise<SizeActionType> {
-  const validSizeForm = SizeUpdateFormSchema.safeParse(data);
+export default async function productUpdateAction(data: ProductUpdateFormType): Promise<ProductActionType> {
+  const validSizeForm = ProductUpdateFormSchema.safeParse(data);
 
   if (!validSizeForm.success) {
     return {
@@ -20,9 +21,9 @@ export default async function colorUpdateAction(data: SizeUpdateFormType): Promi
   }
   try {
     const sizeData = validSizeForm.data;
-    await colorRepository.update(sizeData.id, sizeData);
+    await productRepository.update(sizeData.id, sizeData);
 
-    revalidateTag('colors', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('products', { expire: EXPIRE_TAG_BILLBOARDS });
     return {
       success: true,
       data: 'ok',

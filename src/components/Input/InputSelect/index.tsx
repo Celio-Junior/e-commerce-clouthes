@@ -9,12 +9,15 @@ import {
 } from '@/components/ui/select';
 import { extractClassesStyles } from '@/utils/extract-classes-styles';
 import { cn } from '@/utils/formats-functions';
-import { ComponentPropsWithRef, ReactNode, RefObject, useEffect } from 'react';
+import { ComponentPropsWithRef, ReactNode, RefObject } from 'react';
 
 type InputSelectProps<D> = {
+  keySelect?: keyof D;
+  // keySelect: Extract<keyof D, string>;
   children: ReactNode;
-  data: D;
-  inputRef: RefObject<string>;
+  data: D[];
+  name: string;
+  inputRef?: RefObject<string>;
   disabled?: boolean;
   className?: ComponentPropsWithRef<'input'>['className'];
   placeholder?: string;
@@ -22,37 +25,40 @@ type InputSelectProps<D> = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function InputSelect<D extends (string | (object & Record<string, any>))[]>({
+export function InputSelect<D extends string | Record<string, any>>({
   children: label,
   data,
-  inputRef,
+  keySelect,
   placeholder,
   disabled,
+  name,
   className = '',
   defaultValue,
 }: InputSelectProps<D>) {
   // 1. Inicializa o ref com o defaultValue se ele existir
 
-  useEffect(() => {
-    if (defaultValue && inputRef && !inputRef.current) {
-      inputRef.current = defaultValue;
-    }
-  }, [defaultValue, inputRef]);
+  // useEffect(() => {
+  //   if (defaultValue && inputRef && !inputRef.current) {
+  //     inputRef.current = defaultValue;
+  //   }
+  // }, [defaultValue, inputRef]);
 
-  const handleSelectChange = (value: string) => {
-    inputRef.current = value;
-  };
+  // const handleSelectChange = (value: string) => {
+  //   // inputRef.current = value;
+  // };
 
+  console.log(data);
   return (
-    <div className={cn('w-full flex flex-col gap-2 mt-2', extractClassesStyles(className, 'w', 'h'))}>
+    <div className={cn('w-80 flex flex-col gap-2 mt-2', extractClassesStyles(className, 'w', 'h'))}>
       <label className="capitalize text-lg text-gray-800 font-semibold" htmlFor={label?.toString()}>
         {label}
       </label>
       <Select
+        name={name}
         key={defaultValue}
         defaultValue={defaultValue ?? ''}
         disabled={disabled}
-        onValueChange={handleSelectChange}
+        // onValueChange={handleSelectChange}
       >
         <SelectTrigger
           className={cn(
@@ -68,14 +74,16 @@ export function InputSelect<D extends (string | (object & Record<string, any>))[
           <SelectGroup>
             <SelectLabel>{label}</SelectLabel>
 
-            {data?.map((item) => {
-              const value = typeof item === 'string' ? item : item.id;
-              return (
-                <SelectItem key={value} value={value}>
-                  {typeof item === 'string' ? item : item.label}
-                </SelectItem>
-              );
-            })}
+            {data
+              ? data.map((item) => {
+                  const value = typeof item === 'string' ? item : String(item.id);
+                  return (
+                    <SelectItem key={value} value={value}>
+                      {typeof item === 'string' ? item : keySelect ? (item[keySelect] as ReactNode) : ''}
+                    </SelectItem>
+                  );
+                })
+              : ''}
           </SelectGroup>
         </SelectContent>
       </Select>

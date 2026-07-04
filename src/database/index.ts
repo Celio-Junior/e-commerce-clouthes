@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import { configDb } from '../config/db';
 import User from '@/models/User';
+import ImageProduct from '@/models/ImageProduct.model';
 import Product from '@/models/Product';
 import Category from '@/models/Category';
 import Billboard from '@/models/Billboard';
@@ -9,7 +10,7 @@ import Size from '@/models/Size.model';
 import Color from '@/models/Color.model';
 
 export const sequelize = new Sequelize(configDb);
-sequelize.addModels([User, Billboard, Category, ImageBillboard, Size, Color, Product]);
+sequelize.addModels([User, Billboard, Category, ImageBillboard, Size, Color, Product, ImageProduct]);
 
 export async function initDB() {
   await sequelize.sync();
