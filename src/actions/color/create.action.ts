@@ -2,7 +2,7 @@
 
 import { ColorActionType } from '@/interfaces/Color.interface';
 
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 
 import { SizeCreateFormSchema, SizeCreateFormType } from '@/lib/validations/size';
 import { colorRepository } from '@/repository/color';
@@ -23,7 +23,7 @@ export default async function colorCreateAction(data: SizeCreateFormType): Promi
   try {
     await colorRepository.create(validSizeForm.data);
 
-    revalidateTag('colors', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('colors', { expire: EXPIRE_TAG_CACHE });
     return {
       success: true,
       data: 'ok',

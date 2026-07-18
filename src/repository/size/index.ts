@@ -1,13 +1,7 @@
 import { initDB } from '@/database';
-import {
-  SizeCreateType,
-  SizeModelType,
-  SizePublicType,
-  SizeRepositoryInterface,
-} from '@/interfaces/Size.interface';
+import { SizeCreateType, SizePublicType, SizeRepositoryInterface } from '@/interfaces/Size.interface';
 import Size from '@/models/Size.model';
 
-//TODO fazendo repository, e ver relacionamento com billboard
 class SizeRepository implements SizeRepositoryInterface {
   constructor() {
     initDB();

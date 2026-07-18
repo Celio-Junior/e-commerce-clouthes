@@ -1,3 +1,4 @@
+'use server';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import env from 'env-var';
@@ -24,6 +25,7 @@ export async function createLoginSession(token: string, isEncode: 'admin' | 'use
 
 //criar uma função que valida e redireciona(talvez transforma essas função em métodos de uma classe)
 export async function verifyLoginSession(isEncode: 'admin' | 'user') {
+  // 'use server';
   const cookieStore = await cookies();
   const token = cookieStore.get(isEncode === 'user' ? loginCookieNameClient : loginCookieAdmin);
   if (!token) return false;

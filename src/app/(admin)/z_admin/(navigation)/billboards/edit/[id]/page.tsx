@@ -11,7 +11,6 @@ import FormBillboard from '@/components/admin/Form/FormBillboard';
 type BillboardNewPageProps = { params: Promise<{ id: string }> };
 
 export default async function BillboardNewPage({ params }: BillboardNewPageProps) {
-  // TODO validar id billboard
   // const { id } = await params;
   return (
     <Container>

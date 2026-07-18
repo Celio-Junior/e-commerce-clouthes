@@ -1,6 +1,6 @@
 'use server';
 
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 
 import { colorRepository } from '@/repository/color';
 import { revalidateTag } from 'next/cache';
@@ -14,7 +14,7 @@ export default async function colorDeleteAction(data: BillboardDeleteActionType)
 
   try {
     await colorRepository.remove(id);
-    revalidateTag('colors', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('colors', { expire: EXPIRE_TAG_CACHE });
   } catch (e) {
     if (e instanceof Error) {
       return {

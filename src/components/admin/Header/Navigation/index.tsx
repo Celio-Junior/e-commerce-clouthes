@@ -10,6 +10,7 @@ export default function NavigationAdmin({ linkNavigation }: { linkNavigation: st
     <nav
       className={clsx(
         'flex gap-2 text-gray-500 text-lg',
+
         // '[&>a]:cursor-pointer [&>a]:font-medium [&>a]:hover:text-gray-800 [&>a]:transition [&>a]:hover:scale-105',
       )}
     >

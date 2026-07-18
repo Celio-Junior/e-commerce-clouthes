@@ -1,8 +1,12 @@
+import { initDB } from '@/database';
 import { UserCreateAttributes, UserModelInterface } from '@/interfaces/user/UserModel';
 import { UserRepositoryInterface } from '@/interfaces/user/UserRepository';
 import User from '@/models/User';
 //talvez criar serviços(regra de negócios) e hash pra senha
 class UserRepository implements UserRepositoryInterface {
+  constructor() {
+    initDB();
+  }
   async findOne(user: Partial<UserCreateAttributes>): Promise<UserModelInterface> {
     const isUser = await User.findOne({ where: user });
 

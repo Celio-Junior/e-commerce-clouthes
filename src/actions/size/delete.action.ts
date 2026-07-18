@@ -1,6 +1,6 @@
 'use server';
 
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 
 import { sizeRepository } from '@/repository/size';
 import { revalidateTag } from 'next/cache';
@@ -14,7 +14,7 @@ export default async function sizeDeleteAction(data: BillboardDeleteActionType) 
 
   try {
     await sizeRepository.remove(id);
-    revalidateTag('sizes', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('sizes', { expire: EXPIRE_TAG_CACHE });
   } catch (e) {
     if (e instanceof Error) {
       return {

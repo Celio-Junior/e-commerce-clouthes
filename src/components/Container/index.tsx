@@ -8,5 +8,5 @@ type ContainerProps = {
 };
 
 export default function Container({ children, className = '' }: ContainerProps) {
-  return <div className={cn('px-10', className)}>{children}</div>;
+  return <div className={cn('px-10', 'mt-5', className)}>{children}</div>;
 }

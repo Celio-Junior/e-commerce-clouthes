@@ -1,6 +1,6 @@
 'use server';
 
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 
 import { productRepository } from '@/repository/product';
 import { revalidateTag } from 'next/cache';
@@ -14,7 +14,7 @@ export default async function productDeleteAction(data: BillboardDeleteActionTyp
 
   try {
     await productRepository.remove(id);
-    revalidateTag('products', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('products', { expire: EXPIRE_TAG_CACHE });
   } catch (e) {
     if (e instanceof Error) {
       return {

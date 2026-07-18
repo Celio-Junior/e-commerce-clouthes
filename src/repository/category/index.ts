@@ -7,7 +7,6 @@ import {
 } from '@/interfaces/Category.interface';
 import Category from '@/models/Category';
 
-//TODO fazendo repository, e ver relacionamento com billboard
 class CategoryRepository implements CategoryRepositoryInterface {
   constructor() {
     initDB();

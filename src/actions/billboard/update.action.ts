@@ -1,7 +1,7 @@
 'use server';
 
 import { BillboardActionType } from '@/interfaces/Billboard.interface';
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 import { BillboardUpdateFormSchema, BillboardUpdateFormType } from '@/lib/validations/billboard';
 import { billboardRepository } from '@/repository/billboard';
 import { formatZodMessage } from '@/utils/formats-functions';
@@ -22,7 +22,7 @@ export default async function billboardUpdateAction(
   try {
     const billboardData = validBillboardForm.data;
     const imgId = await billboardRepository.update(billboardData.id, billboardData);
-    revalidateTag('billboards', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('billboards', { expire: EXPIRE_TAG_CACHE });
     return {
       success: true,
       data: imgId,

@@ -1,7 +1,7 @@
 'use server';
 
 import { CategoryActionType } from '@/interfaces/Category.interface';
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 
 import { CategoryCreateFormSchema, CategoryCreateFormType } from '@/lib/validations/category';
 import { categoryRepository } from '@/repository/category';
@@ -24,7 +24,7 @@ export default async function categoryCreateAction(
   try {
     const category = await categoryRepository.create(validCategoryForm.data);
     // VER O REPOSITORY DO CATEGORIES FAZER OS METODOS
-    revalidateTag('categories', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('categories', { expire: EXPIRE_TAG_CACHE });
     return {
       success: true,
       data: '',

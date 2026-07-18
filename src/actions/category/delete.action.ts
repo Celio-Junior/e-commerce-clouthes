@@ -1,6 +1,6 @@
 'use server';
 
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 
 import { categoryRepository } from '@/repository/category';
 import { revalidateTag } from 'next/cache';
@@ -14,7 +14,7 @@ export default async function categoryDeleteAction(data: BillboardDeleteActionTy
 
   try {
     await categoryRepository.remove(id);
-    revalidateTag('categorys', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('categorys', { expire: EXPIRE_TAG_CACHE });
   } catch (e) {
     if (e instanceof Error) {
       return {

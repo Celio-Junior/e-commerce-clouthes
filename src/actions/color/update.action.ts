@@ -1,7 +1,7 @@
 'use server';
 
 import { SizeActionType } from '@/interfaces/Size.interface';
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 
 import { SizeUpdateFormSchema, SizeUpdateFormType } from '@/lib/validations/size';
 import { colorRepository } from '@/repository/color';
@@ -22,7 +22,7 @@ export default async function colorUpdateAction(data: SizeUpdateFormType): Promi
     const sizeData = validSizeForm.data;
     await colorRepository.update(sizeData.id, sizeData);
 
-    revalidateTag('colors', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('colors', { expire: EXPIRE_TAG_CACHE });
     return {
       success: true,
       data: 'ok',

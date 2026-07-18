@@ -1,7 +1,7 @@
 'use server';
 
 import { SizeActionType } from '@/interfaces/Size.interface';
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 
 import { SizeCreateFormSchema, SizeCreateFormType } from '@/lib/validations/size';
 
@@ -23,7 +23,7 @@ export default async function SizeCreateAction(data: SizeCreateFormType): Promis
   try {
     await sizeRepository.create(validSizeForm.data);
 
-    revalidateTag('sizes', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('sizes', { expire: EXPIRE_TAG_CACHE });
     return {
       success: true,
       data: '',

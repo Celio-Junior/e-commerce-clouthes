@@ -2,7 +2,7 @@
 
 import { ProductActionType } from '@/interfaces/Product..interface';
 
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 import { ProductUpdateFormSchema, ProductUpdateFormType } from '@/lib/validations/product';
 
 import { productRepository } from '@/repository/product';
@@ -23,7 +23,7 @@ export default async function productUpdateAction(data: ProductUpdateFormType): 
     const sizeData = validSizeForm.data;
     await productRepository.update(sizeData.id, sizeData);
 
-    revalidateTag('products', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('products', { expire: EXPIRE_TAG_CACHE });
     return {
       success: true,
       data: 'ok',

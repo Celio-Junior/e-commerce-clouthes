@@ -1,6 +1,6 @@
 'use server';
 
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 import { billboardRepository } from '@/repository/billboard';
 import { revalidateTag } from 'next/cache';
 
@@ -13,7 +13,7 @@ export default async function billboardDeleteAction(data: BillboardDeleteActionT
 
   try {
     await billboardRepository.remove(id);
-    revalidateTag('billboards', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('billboards', { expire: EXPIRE_TAG_CACHE });
   } catch (e) {
     if (e instanceof Error) {
       return {
@@ -31,7 +31,7 @@ export default async function billboardDeleteAction(data: BillboardDeleteActionT
 export async function billboardImageDeleteAction(id: string) {
   try {
     await billboardRepository.removeImages(id);
-    revalidateTag('billboardImages', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('billboardImages', { expire: EXPIRE_TAG_CACHE });
   } catch (e) {
     // if (e instanceof Error) {
     //   return {

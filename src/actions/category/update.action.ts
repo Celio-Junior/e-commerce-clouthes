@@ -1,7 +1,7 @@
 'use server';
 
 import { CategoryActionType } from '@/interfaces/Category.interface';
-import { EXPIRE_TAG_BILLBOARDS } from '@/lib/constants';
+import { EXPIRE_TAG_CACHE } from '@/lib/constants';
 
 import { CategoryUpdateFormSchema, CategoryUpdateFormType } from '@/lib/validations/category';
 
@@ -24,7 +24,7 @@ export default async function categoryUpdateAction(
     const categoryData = validCategoryForm.data;
     const categoryId = await categoryRepository.update(categoryData.id, categoryData);
 
-    revalidateTag('colors', { expire: EXPIRE_TAG_BILLBOARDS });
+    revalidateTag('colors', { expire: EXPIRE_TAG_CACHE });
     return {
       success: true,
       data: categoryId,
